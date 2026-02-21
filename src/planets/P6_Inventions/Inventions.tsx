@@ -5,21 +5,21 @@ import type { Invention } from '../../types';
 import styles from './Inventions.module.css';
 
 const QUESTIONS = [
-  'Mas napad na produkt, sluzbu nebo vynalez, ktery pomuze lidem?',
-  'Co me nekdy trapi?',
-  'Co lidem kolem me chybi?',
-  'Kdybych mohl/a neco zjednodusit, co by to bylo?',
-  'Kdo mi s tim muze pomoci?',
-  'Komu tento produkt/sluzba/vynalez pomuze?',
-  'Co by to delalo?',
-  'Jak by se to pouzivalo?',
-  'Co se diky tomu zmeni?',
-  'Co se musim naucit, abych to mohl/a vymyslet?',
-  'Co udelam jako prvni?',
-  'Kolik penez potrebuji do zacatku?',
-  'Jak se citim, kdyz o tom mluvim?',
-  'Jak bych to vysvetlil/a kamaradovi?',
-  'Sestav plan realizace - jak budes postupovat?',
+  'Máš nápad na produkt, službu nebo vynález, který pomůže lidem?',
+  'Co mě někdy trápí?',
+  'Co lidem kolem mě chybí?',
+  'Kdybych mohl/a něco zjednodušit, co by to bylo?',
+  'Kdo mi s tím může pomoci?',
+  'Komu tento produkt/služba/vynález pomůže?',
+  'Co by to dělalo?',
+  'Jak by se to používalo?',
+  'Co se díky tomu změní?',
+  'Co se musím naučit, abych to mohl/a vymyslet?',
+  'Co udělám jako první?',
+  'Kolik peněz potřebuji do začátku?',
+  'Jak se cítím, když o tom mluvím?',
+  'Jak bych to vysvětlil/a kamarádovi?',
+  'Sestav plán realizace - jak budeš postupovat?',
 ];
 
 const QUESTION_ICONS = [
@@ -94,7 +94,7 @@ export default function Inventions() {
   if (viewingInvention) {
     return (
       <div className={styles.container}>
-        <PlanetHeader name="Vynalezy" icon="🔧" color="#f59e0b" />
+        <PlanetHeader name="Vynálezy" icon="🔧" color="#f59e0b" />
         <div className={styles.content}>
           <InventionSummaryCard
             invention={viewingInvention}
@@ -107,25 +107,25 @@ export default function Inventions() {
 
   return (
     <div className={styles.container}>
-      <PlanetHeader name="Vynalezy" icon="🔧" color="#f59e0b" />
+      <PlanetHeader name="Vynálezy" icon="🔧" color="#f59e0b" />
 
       <div className={styles.content}>
         {!isCreating ? (
           /* Inventions list view */
           <div className={styles.listView}>
             <div className={styles.listHeader}>
-              <h2 className={styles.listTitle}>Moje vynalezy</h2>
+              <h2 className={styles.listTitle}>Moje vynálezy</h2>
               <button className={styles.newBtn} onClick={startNewInvention}>
-                + Novy vynalez
+                + Nový vynález
               </button>
             </div>
 
             {inventions.length === 0 ? (
               <div className={styles.emptyState}>
                 <span className={styles.emptyIcon}>🔧</span>
-                <p>Zatim nemas zadny vynalez.</p>
+                <p>Zatím nemáš žádný vynález.</p>
                 <button className={styles.startBtn} onClick={startNewInvention}>
-                  Vymysli svuj prvni vynalez!
+                  Vymysli svůj první vynález!
                 </button>
               </div>
             ) : (
@@ -134,7 +134,7 @@ export default function Inventions() {
                   <div key={inv.id} className={styles.inventionCard}>
                     <div className={styles.inventionCardIcon}>💡</div>
                     <h3 className={styles.inventionCardTitle}>
-                      {inv.answers['0']?.substring(0, 60) || 'Beze jmena'}
+                      {inv.answers['0']?.substring(0, 60) || 'Beze jména'}
                       {(inv.answers['0']?.length || 0) > 60 ? '...' : ''}
                     </h3>
                     <p className={styles.inventionCardDate}>
@@ -168,9 +168,9 @@ export default function Inventions() {
           <div className={styles.summaryView}>
             <div className={styles.summaryHeader}>
               <span className={styles.summaryIcon}>🏆</span>
-              <h2 className={styles.summaryTitle}>Muj vynalez</h2>
+              <h2 className={styles.summaryTitle}>Můj vynález</h2>
               <p className={styles.summarySubtitle}>
-                Vyborne! Tady je prehled tvych odpovedi.
+                Výborně! Tady je přehled tvých odpovědí.
               </p>
             </div>
 
@@ -182,7 +182,7 @@ export default function Inventions() {
                     {q}
                   </div>
                   <p className={styles.summaryCardA}>
-                    {answers[i.toString()] || <em className={styles.noAnswer}>Bez odpovedi</em>}
+                    {answers[i.toString()] || <em className={styles.noAnswer}>Bez odpovědi</em>}
                   </p>
                 </div>
               ))}
@@ -190,13 +190,13 @@ export default function Inventions() {
 
             <div className={styles.summaryActions}>
               <button className={styles.backToEditBtn} onClick={() => setShowSummary(false)}>
-                &#8592; Upravit odpovedi
+                &#8592; Upravit odpovědi
               </button>
               <button className={styles.saveFinalBtn} onClick={handleSaveInvention}>
-                Ulozit vynalez
+                Uložit vynález
               </button>
               <button className={styles.cancelBtn} onClick={resetWizard}>
-                Zrusit
+                Zrušit
               </button>
             </div>
           </div>
@@ -224,12 +224,12 @@ export default function Inventions() {
                 className={styles.answerArea}
                 value={answers[currentStep.toString()] || ''}
                 onChange={e => handleAnswer(e.target.value)}
-                placeholder="Napis svou odpoved..."
+                placeholder="Napiš svou odpověď..."
                 rows={currentStep === QUESTIONS.length - 1 ? 8 : 5}
               />
               {currentStep === QUESTIONS.length - 1 && (
                 <p className={styles.planHint}>
-                  Tip: Kazdy krok napis na novy radek, aby se ti plan pekne zobrazil.
+                  Tip: Každý krok napiš na nový řádek, aby se ti plán pěkně zobrazil.
                 </p>
               )}
             </div>
@@ -241,18 +241,18 @@ export default function Inventions() {
                 onClick={goPrev}
                 disabled={currentStep === 0}
               >
-                &#8592; Predchozi
+                &#8592; Předchozí
               </button>
               <button
                 className={styles.nextBtn}
                 onClick={goNext}
               >
-                {currentStep === QUESTIONS.length - 1 ? 'Zobrazit shrnutí' : 'Dalsi &#8594;'}
+                {currentStep === QUESTIONS.length - 1 ? 'Zobrazit shrnutí' : 'Další &#8594;'}
               </button>
             </div>
 
             <button className={styles.cancelWizardBtn} onClick={resetWizard}>
-              Zrusit
+              Zrušit
             </button>
           </div>
         )}
@@ -272,9 +272,9 @@ function InventionSummaryCard({
     <div className={styles.summaryView}>
       <div className={styles.summaryHeader}>
         <span className={styles.summaryIcon}>💡</span>
-        <h2 className={styles.summaryTitle}>Muj vynalez</h2>
+        <h2 className={styles.summaryTitle}>Můj vynález</h2>
         <p className={styles.summarySubtitle}>
-          Vytvoreno{' '}
+          Vytvořeno{' '}
           {new Date(invention.createdAt).toLocaleDateString('cs-CZ', {
             day: 'numeric',
             month: 'long',
@@ -291,7 +291,7 @@ function InventionSummaryCard({
               {q}
             </div>
             <p className={styles.summaryCardA}>
-              {invention.answers[i.toString()] || <em className={styles.noAnswer}>Bez odpovedi</em>}
+              {invention.answers[i.toString()] || <em className={styles.noAnswer}>Bez odpovědi</em>}
             </p>
           </div>
         ))}
@@ -299,7 +299,7 @@ function InventionSummaryCard({
 
       {invention.plan.length > 0 && (
         <div className={styles.planSection}>
-          <h3 className={styles.planTitle}>Plan realizace</h3>
+          <h3 className={styles.planTitle}>Plán realizace</h3>
           <ol className={styles.planList}>
             {invention.plan.map((step, i) => (
               <li key={i} className={styles.planItem}>{step}</li>
@@ -309,7 +309,7 @@ function InventionSummaryCard({
       )}
 
       <button className={styles.backToListBtn} onClick={onBack}>
-        &#8592; Zpet na seznam
+        &#8592; Zpět na seznam
       </button>
     </div>
   );

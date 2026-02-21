@@ -82,14 +82,14 @@ export default function Giving() {
 
   return (
     <div className={styles.container}>
-      <PlanetHeader name="Davani" icon="❤️" color="#ef4444" />
+      <PlanetHeader name="Dávání" icon="❤️" color="#ef4444" />
 
       <div className={styles.content}>
         {/* Intro section */}
         <div className={styles.intro}>
-          <h2 className={styles.introTitle}>Dej a bude ti dano...</h2>
+          <h2 className={styles.introTitle}>Dej a bude ti dáno...</h2>
           <p className={styles.introText}>
-            Znamena to, ze kdyz davas - cas, pozornost, pomoc, laskavost, podporu, energii - zivot ti to vraci. Ne vzdy hned. Ne vzdy stejnym zpusobem. Ale vraci.
+            Znamená to, že když dáváš - čas, pozornost, pomoc, laskavost, podporu, energii - život ti to vrací. Ne vždy hned. Ne vždy stejným způsobem. Ale vrací.
           </p>
           <div className={styles.heartDecoration}>
             <span className={styles.heart1}>&#10084;</span>
@@ -101,25 +101,25 @@ export default function Giving() {
         {/* Toggle form */}
         {!showForm && (
           <button className={styles.newEntryBtn} onClick={() => setShowForm(true)}>
-            + Novy zapis
+            + Nový zápis
           </button>
         )}
 
         {/* Form */}
         {showForm && (
           <div className={styles.form}>
-            <h3 className={styles.formTitle}>Co chces darovat svetu?</h3>
+            <h3 className={styles.formTitle}>Co chceš darovat světu?</h3>
 
             <div className={styles.formGroup}>
               <label className={styles.formLabel}>
                 <span className={styles.labelIcon}>&#128257;</span>
-                Co bys rad daroval pravidelne?
+                Co bys rád daroval pravidelně?
               </label>
               <textarea
                 className={styles.formTextArea}
                 value={form.whatToGiveRegular}
                 onChange={e => handleChange('whatToGiveRegular', e.target.value)}
-                placeholder="Napr. cas s babickou, pomoc sousedce..."
+                placeholder="Např. čas s babičkou, pomoc sousedce..."
                 rows={3}
               />
             </div>
@@ -127,13 +127,13 @@ export default function Giving() {
             <div className={styles.formGroup}>
               <label className={styles.formLabel}>
                 <span className={styles.labelIcon}>&#127873;</span>
-                Co bys rad daroval jednorazove?
+                Co bys rád daroval jednorázově?
               </label>
               <textarea
                 className={styles.formTextArea}
                 value={form.whatToGiveOneTime}
                 onChange={e => handleChange('whatToGiveOneTime', e.target.value)}
-                placeholder="Napr. hracky detem v nemocnici..."
+                placeholder="Např. hračky dětem v nemocnici..."
                 rows={3}
               />
             </div>
@@ -141,13 +141,13 @@ export default function Giving() {
             <div className={styles.formGroup}>
               <label className={styles.formLabel}>
                 <span className={styles.labelIcon}>&#129309;</span>
-                Komu bys chtel pomahat pravidelne?
+                Komu bys chtěl pomáhat pravidelně?
               </label>
               <textarea
                 className={styles.formTextArea}
                 value={form.whoToHelp}
                 onChange={e => handleChange('whoToHelp', e.target.value)}
-                placeholder="Napr. starsim lidem, zviratem v utulku..."
+                placeholder="Např. starším lidem, zvířatům v útulku..."
                 rows={3}
               />
             </div>
@@ -155,13 +155,13 @@ export default function Giving() {
             <div className={styles.formGroup}>
               <label className={styles.formLabel}>
                 <span className={styles.labelIcon}>&#127758;</span>
-                Co bys chtel delat za dobrovolnickou praci?
+                Co bys chtěl dělat za dobrovolnickou práci?
               </label>
               <textarea
                 className={styles.formTextArea}
                 value={form.volunteerWork}
                 onChange={e => handleChange('volunteerWork', e.target.value)}
-                placeholder="Napr. uklid prirody, cteni detem..."
+                placeholder="Např. úklid přírody, čtení dětem..."
                 rows={3}
               />
             </div>
@@ -169,13 +169,13 @@ export default function Giving() {
             <div className={styles.formGroup}>
               <label className={styles.formLabel}>
                 <span className={styles.labelIcon}>&#128170;</span>
-                V cem jsou tve silne stranky?
+                V čem jsou tvé silné stránky?
               </label>
               <textarea
                 className={styles.formTextArea}
                 value={form.strengths}
                 onChange={e => handleChange('strengths', e.target.value)}
-                placeholder="Napr. jsem trpelivy, umim dobre poslouchat..."
+                placeholder="Např. jsem trpělivý, umím dobře poslouchat..."
                 rows={3}
               />
             </div>
@@ -183,13 +183,13 @@ export default function Giving() {
             <div className={styles.formGroup}>
               <label className={styles.formLabel}>
                 <span className={styles.labelIcon}>&#11088;</span>
-                Co ti jde? Co na tobe lide ocenuji?
+                Co ti jde? Co na tobě lidé oceňují?
               </label>
               <textarea
                 className={styles.formTextArea}
                 value={form.appreciated}
                 onChange={e => handleChange('appreciated', e.target.value)}
-                placeholder="Napr. umim rozveselit, jsem spolehlivy..."
+                placeholder="Např. umím rozveselit, jsem spolehlivý..."
                 rows={3}
               />
             </div>
@@ -200,14 +200,14 @@ export default function Giving() {
                 onClick={handleSave}
                 disabled={!Object.values(form).some(v => v.trim())}
               >
-                {saved ? '&#10003; Ulozeno!' : '&#10084; Ulozit'}
+                {saved ? '&#10003; Uloženo!' : '&#10084; Uložit'}
               </button>
               {entries.length > 0 && (
                 <button
                   className={styles.cancelFormBtn}
                   onClick={() => { setShowForm(false); setForm(INITIAL_FORM); }}
                 >
-                  Zrusit
+                  Zrušit
                 </button>
               )}
             </div>
@@ -217,7 +217,7 @@ export default function Giving() {
         {/* Saved entries */}
         {entries.length > 0 && (
           <div className={styles.entriesSection}>
-            <h3 className={styles.entriesTitle}>Moje dary svetu</h3>
+            <h3 className={styles.entriesTitle}>Moje dary světu</h3>
             <div className={styles.entriesGrid}>
               {entries.map(entry => (
                 <div
@@ -226,7 +226,7 @@ export default function Giving() {
                 >
                   <div className={styles.entryCardHeader}>
                     <span className={styles.entryBadge}>
-                      {entry.type === 'regular' ? '&#128257; Pravidelne' : '&#127873; Jednorazove'}
+                      {entry.type === 'regular' ? '&#128257; Pravidelně' : '&#127873; Jednorázově'}
                     </span>
                     <button
                       className={styles.deleteBtn}
@@ -246,21 +246,21 @@ export default function Giving() {
 
                   {entry.whoToHelp && (
                     <div className={styles.entryField}>
-                      <span className={styles.entryFieldLabel}>Komu pomahám:</span>
+                      <span className={styles.entryFieldLabel}>Komu pomáhám:</span>
                       <p>{entry.whoToHelp}</p>
                     </div>
                   )}
 
                   {entry.volunteerWork && (
                     <div className={styles.entryField}>
-                      <span className={styles.entryFieldLabel}>Dobrovolnictvi:</span>
+                      <span className={styles.entryFieldLabel}>Dobrovolnictví:</span>
                       <p>{entry.volunteerWork}</p>
                     </div>
                   )}
 
                   {entry.strengths && (
                     <div className={styles.entryField}>
-                      <span className={styles.entryFieldLabel}>Moje sila:</span>
+                      <span className={styles.entryFieldLabel}>Moje síla:</span>
                       <p>{entry.strengths}</p>
                     </div>
                   )}

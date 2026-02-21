@@ -191,7 +191,7 @@ export default function FutureSelf() {
         {activeTab === 'avatar' && (
           <section className={styles.avatarSection}>
             <h2 className={styles.sectionTitle}>
-              Vytvoř sve budouci ja (30 let)
+              Vytvoř své budoucí já (30 let)
             </h2>
             <p className={styles.sectionSubtitle}>
               Jak si představuješ sebe za mnoho let? Pojďme to společně vytvořit!
@@ -219,7 +219,7 @@ export default function FutureSelf() {
 
                 {/* Hair style */}
                 <div className={styles.controlGroup}>
-                  <label className={styles.label}>Styl vlasu</label>
+                  <label className={styles.label}>Styl vlasů</label>
                   <div className={styles.optionRow}>
                     {(['short', 'long', 'curly', 'bald'] as const).map(style => (
                       <button
@@ -236,7 +236,7 @@ export default function FutureSelf() {
                 {/* Hair color */}
                 {avatar.hairStyle !== 'bald' && (
                   <div className={styles.controlGroup}>
-                    <label className={styles.label}>Barva vlasu</label>
+                    <label className={styles.label}>Barva vlasů</label>
                     <div className={styles.colorRow}>
                       {HAIR_COLORS.map(color => (
                         <button
@@ -253,7 +253,7 @@ export default function FutureSelf() {
 
                 {/* Outfit */}
                 <div className={styles.controlGroup}>
-                  <label className={styles.label}>Styl obleceni</label>
+                  <label className={styles.label}>Styl oblečení</label>
                   <div className={styles.optionRow}>
                     {(['casual', 'formal', 'sporty', 'creative'] as const).map(outfit => (
                       <button
@@ -269,7 +269,7 @@ export default function FutureSelf() {
 
                 {/* Text inputs */}
                 <div className={styles.controlGroup}>
-                  <label className={styles.label}>Jmeno</label>
+                  <label className={styles.label}>Jméno</label>
                   <input
                     type="text"
                     className={styles.textInput}
@@ -280,40 +280,40 @@ export default function FutureSelf() {
                 </div>
 
                 <div className={styles.controlGroup}>
-                  <label className={styles.label}>Povolani</label>
+                  <label className={styles.label}>Povolání</label>
                   <input
                     type="text"
                     className={styles.textInput}
                     value={avatar.profession}
                     onChange={e => setAvatar(prev => ({ ...prev, profession: e.target.value }))}
-                    placeholder="Cim chces byt?"
+                    placeholder="Čím chceš být?"
                   />
                 </div>
 
                 <div className={styles.controlGroup}>
-                  <label className={styles.label}>Co vsechno umis</label>
+                  <label className={styles.label}>Co všechno umíš</label>
                   <textarea
                     className={styles.textArea}
                     value={avatar.skills}
                     onChange={e => setAvatar(prev => ({ ...prev, skills: e.target.value }))}
-                    placeholder="Vypis sve superschopnosti..."
+                    placeholder="Vypiš své superschopnosti..."
                     rows={3}
                   />
                 </div>
 
                 <div className={styles.controlGroup}>
-                  <label className={styles.label}>Jakou mas moudrost</label>
+                  <label className={styles.label}>Jakou máš moudrost</label>
                   <textarea
                     className={styles.textArea}
                     value={avatar.wisdom}
                     onChange={e => setAvatar(prev => ({ ...prev, wisdom: e.target.value }))}
-                    placeholder="Co bys poradil/a svemu mladsímu ja?"
+                    placeholder="Co bys poradil/a svému mladšímu já?"
                     rows={3}
                   />
                 </div>
 
                 <button className={styles.saveBtn} onClick={handleSaveAvatar}>
-                  {avatarSaved ? '&#10003; Ulozeno!' : 'Ulozit avatar'}
+                  {avatarSaved ? '&#10003; Uloženo!' : 'Uložit avatar'}
                 </button>
               </div>
             </div>
@@ -346,9 +346,9 @@ export default function FutureSelf() {
 
         {activeTab === 'diary' && (
           <section className={styles.diarySection}>
-            <h2 className={styles.sectionTitle}>Vesmirny denik</h2>
+            <h2 className={styles.sectionTitle}>Vesmírný deník</h2>
             <p className={styles.sectionSubtitle}>
-              Poloz otazku svemu budoucimu ja. Pak se vcit do role sveho 30leteho ja a odpovez s moudrostí.
+              Polož otázku svému budoucímu já. Pak se vciť do role svého 30letého já a odpověz s moudrostí.
             </p>
 
             <div className={styles.diaryComposer}>
@@ -356,13 +356,13 @@ export default function FutureSelf() {
                 <div className={styles.questionPhase}>
                   <div className={styles.composerLabel}>
                     <span className={styles.composerIcon}>&#128103;</span>
-                    Tvoje otazka:
+                    Tvoje otázka:
                   </div>
                   <textarea
                     className={styles.diaryTextArea}
                     value={question}
                     onChange={e => setQuestion(e.target.value)}
-                    placeholder="Co bych mel udelat, abych..."
+                    placeholder="Co bych měl udělat, abych..."
                     rows={4}
                   />
                   <button
@@ -370,7 +370,7 @@ export default function FutureSelf() {
                     onClick={handleAskQuestion}
                     disabled={!question.trim()}
                   >
-                    Zeptat se budouciho ja &#8594;
+                    Zeptat se budoucího já &#8594;
                   </button>
                 </div>
               ) : (
@@ -386,7 +386,7 @@ export default function FutureSelf() {
 
                   <div className={styles.composerLabel}>
                     <span className={styles.composerIcon}>&#129489;&#8205;&#128640;</span>
-                    Odpoved budouciho ja ({avatar.name || 'Budouci Ty'}):
+                    Odpověď budoucího já ({avatar.name || 'Budoucí Ty'}):
                   </div>
                   <textarea
                     className={styles.diaryTextArea}
@@ -400,14 +400,14 @@ export default function FutureSelf() {
                       className={styles.backBtn}
                       onClick={() => { setIsAnswering(false); setAnswer(''); }}
                     >
-                      &#8592; Zpet
+                      &#8592; Zpět
                     </button>
                     <button
                       className={styles.saveEntryBtn}
                       onClick={handleSaveDiaryEntry}
                       disabled={!answer.trim()}
                     >
-                      Ulozit do deniku
+                      Uložit do deníku
                     </button>
                   </div>
                 </div>
@@ -417,7 +417,7 @@ export default function FutureSelf() {
             {/* Diary entries */}
             {diaryEntries.length > 0 && (
               <div className={styles.diaryEntries}>
-                <h3 className={styles.entriesTitle}>Zapisy v deniku</h3>
+                <h3 className={styles.entriesTitle}>Zápisy v deníku</h3>
                 {diaryEntries.map(entry => (
                   <div key={entry.id} className={styles.entryCard}>
                     <div className={styles.entryDate}>
@@ -436,7 +436,7 @@ export default function FutureSelf() {
                       </div>
                       <div className={styles.bubbleFuture}>
                         <span className={styles.bubbleSender}>
-                          {avatar.name || 'Budouci Ty'}:
+                          {avatar.name || 'Budoucí Ty'}:
                         </span>
                         <p>{entry.answer}</p>
                       </div>

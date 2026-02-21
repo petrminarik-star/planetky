@@ -21,9 +21,9 @@ interface Talisman {
 
 const SUB_PLANETS: { key: SubPlanet; label: string; color: string; emoji: string }[] = [
   { key: 'meditace', label: 'Meditace', color: '#7b68ee', emoji: '\uD83E\uDDD8' },
-  { key: 'dychani', label: 'Dychani', color: '#48d1cc', emoji: '\uD83C\uDF2C\uFE0F' },
+  { key: 'dychani', label: 'Dýchání', color: '#48d1cc', emoji: '\uD83C\uDF2C\uFE0F' },
   { key: 'afirmace', label: 'Afirmace', color: '#ff69b4', emoji: '\uD83D\uDCAB' },
-  { key: 'radost', label: 'Radostne karticky', color: '#ffd700', emoji: '\uD83C\uDF1E' },
+  { key: 'radost', label: 'Radostné kartičky', color: '#ffd700', emoji: '\uD83C\uDF1E' },
   { key: 'talisman', label: 'Talisman', color: '#ff6b6b', emoji: '\uD83D\uDD2E' },
 ];
 
@@ -40,7 +40,7 @@ export default function AntiStress() {
 
   return (
     <div className={styles.container}>
-      <PlanetHeader name="Antistresova planeta" icon="\uD83E\uDDD8" color="#98FB98" />
+      <PlanetHeader name="Antistresová planeta" icon="\uD83E\uDDD8" color="#98FB98" />
 
       <div className={styles.content}>
         {!activeSection ? (
@@ -51,7 +51,7 @@ export default function AntiStress() {
               className={styles.sectionBack}
               onClick={() => setActiveSection(null)}
             >
-              {'\u2190'} Zpet
+              {'\u2190'} Zpět
             </button>
             {activeSection === 'meditace' && <Meditace />}
             {activeSection === 'dychani' && <Dychani />}
@@ -158,7 +158,7 @@ function Meditace() {
       {!isRunning && timeLeft === 0 ? (
         <>
           <p className={styles.sectionDesc}>
-            Zavri oci, dychej a poslouchej...
+            Zavři oči, dýchej a poslouchej...
           </p>
           <div className={styles.timerOptions}>
             {TIMER_OPTIONS.map((opt) => (
@@ -175,7 +175,7 @@ function Meditace() {
       ) : timeLeft === 0 && !isRunning ? (
         <div className={styles.meditaceDone}>
           <span className={styles.doneEmoji}>{'\u2728'}</span>
-          <p className={styles.doneText}>Skvele! Meditace je u konce.</p>
+          <p className={styles.doneText}>Skvěle! Meditace je u konce.</p>
           <button className={styles.resetBtn} onClick={stopTimer}>
             Znovu
           </button>
@@ -194,9 +194,9 @@ function Meditace() {
           <p className={styles.timerText}>
             {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
           </p>
-          <p className={styles.meditaceHint}>Zavri oci a dychej klidne...</p>
+          <p className={styles.meditaceHint}>Zavři oči a dýchej klidně...</p>
           <button className={styles.stopBtn} onClick={stopTimer}>
-            Ukoncit
+            Ukončit
           </button>
         </div>
       )}
@@ -262,15 +262,15 @@ function Dychani() {
 
   return (
     <div className={styles.dychani}>
-      <h2 className={styles.sectionTitle}>{'\uD83C\uDF2C\uFE0F'} Dychani</h2>
+      <h2 className={styles.sectionTitle}>{'\uD83C\uDF2C\uFE0F'} Dýchání</h2>
 
       {!isActive ? (
         <>
           <p className={styles.sectionDesc}>
-            Dychej se mnou: 4 sekundy nadech, 6 sekund vydech
+            Dýchej se mnou: 4 sekundy nádech, 6 sekund výdech
           </p>
           <button className={styles.startBreathBtn} onClick={start}>
-            Zacit dychat
+            Začít dýchat
           </button>
         </>
       ) : (
@@ -284,13 +284,13 @@ function Dychani() {
             <span className={styles.breathCountdown}>{countdown}</span>
           </div>
           <p className={styles.breathPhaseText}>
-            {phase === 'inhale' ? 'Nadech nosem...' : 'Vydech nosem...'}
+            {phase === 'inhale' ? 'Nádech nosem...' : 'Výdech nosem...'}
           </p>
           <p className={styles.breathCycles}>
-            Dokonceno cyklu: {cycles}
+            Dokončeno cyklů: {cycles}
           </p>
           <button className={styles.stopBtn} onClick={stop}>
-            Ukoncit
+            Ukončit
           </button>
         </div>
       )}
@@ -323,14 +323,14 @@ function AfirmaceSection() {
   return (
     <div className={styles.afirmace}>
       <h2 className={styles.sectionTitle}>{'\uD83D\uDCAB'} Afirmace</h2>
-      <p className={styles.sectionDesc}>Precti si a opakuj si v duchu:</p>
+      <p className={styles.sectionDesc}>Přečti si a opakuj si v duchu:</p>
 
       <div className={`${styles.affirmationCard} ${isAnimating ? styles.affirmationOut : ''}`}>
         <p className={styles.affirmationText}>{AFFIRMATIONS[currentIndex]}</p>
       </div>
 
       <button className={styles.nextCardBtn} onClick={nextAffirmation}>
-        Dalsi afirmace
+        Další afirmace
       </button>
     </div>
   );
@@ -360,15 +360,15 @@ function RadostSection() {
 
   return (
     <div className={styles.radost}>
-      <h2 className={styles.sectionTitle}>{'\uD83C\uDF1E'} Radostne karticky</h2>
-      <p className={styles.sectionDesc}>Otevri si karticky plne radosti:</p>
+      <h2 className={styles.sectionTitle}>{'\uD83C\uDF1E'} Radostné kartičky</h2>
+      <p className={styles.sectionDesc}>Otevři si kartičky plné radosti:</p>
 
       <div className={`${styles.joyCard} ${isAnimating ? styles.joyCardOut : ''}`}>
         <p className={styles.joyCardText}>{JOY_CARDS[currentIndex]}</p>
       </div>
 
       <button className={styles.nextCardBtn} onClick={nextCard}>
-        Dalsi karticka
+        Další kartička
       </button>
     </div>
   );
@@ -380,7 +380,7 @@ function RadostSection() {
 
 const TALISMAN_SHAPES: { key: Talisman['shape']; label: string; emoji: string }[] = [
   { key: 'circle', label: 'Kruh', emoji: '\u2B55' },
-  { key: 'star', label: 'Hvezda', emoji: '\u2B50' },
+  { key: 'star', label: 'Hvězda', emoji: '\u2B50' },
   { key: 'heart', label: 'Srdce', emoji: '\u2764\uFE0F' },
   { key: 'diamond', label: 'Diamant', emoji: '\uD83D\uDD37' },
 ];
@@ -426,7 +426,7 @@ function TalismanSection() {
     <div className={styles.talisman}>
       <h2 className={styles.sectionTitle}>{'\uD83D\uDD2E'} Talisman</h2>
       <p className={styles.sectionDesc}>
-        Vytvor si talisman pro stesti!
+        Vytvoř si talisman pro štěstí!
       </p>
 
       {!showSaved ? (
@@ -504,14 +504,14 @@ function TalismanSection() {
               type="text"
               value={text}
               onChange={(e) => setText(e.target.value)}
-              placeholder="Tvoje magicke slovo..."
+              placeholder="Tvoje magické slovo..."
               maxLength={20}
             />
           </div>
 
           <div className={styles.talismanActions}>
             <button className={styles.saveTalismanBtn} onClick={saveTalisman}>
-              Ulozit talisman
+              Uložit talisman
             </button>
             {talismans.length > 0 && (
               <button
@@ -529,7 +529,7 @@ function TalismanSection() {
             className={styles.backToCreatorBtn}
             onClick={() => setShowSaved(false)}
           >
-            {'\u2190'} Zpet na tvorbu
+            {'\u2190'} Zpět na tvorbu
           </button>
           <div className={styles.savedGrid}>
             {talismans.map((t) => (

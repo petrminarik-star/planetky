@@ -5,11 +5,11 @@ import type { Dream, DreamTimeframe } from '../../types';
 import styles from './DreamBoard.module.css';
 
 const TABS: { key: DreamTimeframe | 'completed'; label: string; icon: string }[] = [
-  { key: '6months', label: 'Do pul roku', icon: '\uD83C\uDF1F' },
+  { key: '6months', label: 'Do půl roku', icon: '\uD83C\uDF1F' },
   { key: '1year', label: 'Do roka', icon: '\u2B50' },
   { key: '1-3years', label: '1-3 roky', icon: '\uD83D\uDE80' },
-  { key: 'beyond', label: 'Dale', icon: '\uD83C\uDF0C' },
-  { key: 'completed', label: 'Splnene', icon: '\u2705' },
+  { key: 'beyond', label: 'Dále', icon: '\uD83C\uDF0C' },
+  { key: 'completed', label: 'Splněné', icon: '\u2705' },
 ];
 
 function generateId(): string {
@@ -102,7 +102,7 @@ export default function DreamBoard() {
 
   return (
     <div className={styles.container}>
-      <PlanetHeader name="Nastenka snu" icon="\u2728" color="#FF69B4" />
+      <PlanetHeader name="Nástěnka snů" icon="\u2728" color="#FF69B4" />
 
       <div className={styles.content}>
         {/* Tabs */}
@@ -123,7 +123,7 @@ export default function DreamBoard() {
         {activeTab !== 'completed' && (
           <button className={styles.addButton} onClick={openAddForm}>
             <span className={styles.addIcon}>+</span>
-            Pridat sen
+            Přidat sen
           </button>
         )}
 
@@ -136,8 +136,8 @@ export default function DreamBoard() {
               </span>
               <p className={styles.emptyText}>
                 {activeTab === 'completed'
-                  ? 'Zatim zadny splneny sen. Nevas, vsechny sny se plni postupne!'
-                  : 'Zatim tu zadne sny nejsou. Pridej svuj prvni sen!'}
+                  ? 'Zatím žádný splněný sen. Nevadí, všechny sny se plní postupně!'
+                  : 'Zatím tu žádné sny nejsou. Přidej svůj první sen!'}
               </p>
             </div>
           ) : (
@@ -172,7 +172,7 @@ export default function DreamBoard() {
                       className={styles.uncompleteButton}
                       onClick={() => uncompleteDream(dream.id)}
                     >
-                      Vratit zpet
+                      Vrátit zpět
                     </button>
                   )}
                   <button
@@ -201,17 +201,17 @@ export default function DreamBoard() {
         <div className={styles.modalOverlay} onClick={() => setShowForm(false)}>
           <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
             <h2 className={styles.modalTitle}>
-              {editingDream ? 'Upravit sen' : 'Pridat novy sen'}
+              {editingDream ? 'Upravit sen' : 'Přidat nový sen'}
             </h2>
 
             <div className={styles.formGroup}>
-              <label className={styles.label}>Nazev snu</label>
+              <label className={styles.label}>Název snu</label>
               <input
                 className={styles.input}
                 type="text"
                 value={formTitle}
                 onChange={(e) => setFormTitle(e.target.value)}
-                placeholder="O cem snis?"
+                placeholder="O čem sníš?"
                 maxLength={100}
                 autoFocus
               />
@@ -223,14 +223,14 @@ export default function DreamBoard() {
                 className={styles.textarea}
                 value={formDescription}
                 onChange={(e) => setFormDescription(e.target.value)}
-                placeholder="Povedz mi o svem snu vic..."
+                placeholder="Pověz mi o svém snu víc..."
                 rows={3}
                 maxLength={500}
               />
             </div>
 
             <div className={styles.formGroup}>
-              <label className={styles.label}>Obrazek (URL) - volitelne</label>
+              <label className={styles.label}>Obrázek (URL) - volitelné</label>
               <input
                 className={styles.input}
                 type="url"
@@ -241,7 +241,7 @@ export default function DreamBoard() {
             </div>
 
             <div className={styles.formGroup}>
-              <label className={styles.label}>Casovy ramec</label>
+              <label className={styles.label}>Časový rámec</label>
               <div className={styles.timeframeOptions}>
                 {TABS.filter((t) => t.key !== 'completed').map((tab) => (
                   <button
@@ -260,13 +260,13 @@ export default function DreamBoard() {
 
             <div className={styles.modalActions}>
               <button className={styles.saveButton} onClick={saveDream}>
-                {editingDream ? 'Ulozit zmeny' : 'Pridat sen'}
+                {editingDream ? 'Uložit změny' : 'Přidat sen'}
               </button>
               <button
                 className={styles.cancelButton}
                 onClick={() => setShowForm(false)}
               >
-                Zrusit
+                Zrušit
               </button>
             </div>
           </div>

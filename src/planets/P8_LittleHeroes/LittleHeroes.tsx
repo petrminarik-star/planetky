@@ -27,9 +27,9 @@ const PERSONALITIES: PersonalityCard[] = [
     character: 'Mickey Mouse',
     color: '#facc15',
     icon: '\uD83D\uDC2D',
-    traits: 'Vzdy pozitivni, vesely, spolecensky, tymovy.',
-    description: 'Bavi ostatni, rychle si dela kamarady, ma dobre napady.',
-    strengths: 'Komunikace, humor, energie, tvorivost',
+    traits: 'Vždy pozitivní, veselý, společenský, týmový.',
+    description: 'Baví ostatní, rychle si dělá kamarády, má dobré nápady.',
+    strengths: 'Komunikace, humor, energie, tvořivost',
   },
   {
     type: 'cholerik',
@@ -37,9 +37,9 @@ const PERSONALITIES: PersonalityCard[] = [
     character: 'Stitch',
     color: '#3b82f6',
     icon: '\uD83D\uDC7E',
-    traits: 'Silny, rychly, rozhodny.',
-    description: 'Reaguje impulzivne, jde do akce, miluje vyzvy. Nekdy udela driv, nez premysli.',
-    strengths: 'Odvaha, dynamika, vedeni, vykon',
+    traits: 'Silný, rychlý, rozhodný.',
+    description: 'Reaguje impulzivně, jde do akce, miluje výzvy. Někdy udělá dřív, než přemýšlí.',
+    strengths: 'Odvaha, dynamika, vedení, výkon',
   },
   {
     type: 'flegmatik',
@@ -47,9 +47,9 @@ const PERSONALITIES: PersonalityCard[] = [
     character: 'Sonic',
     color: '#06b6d4',
     icon: '\uD83E\uDD94',
-    traits: 'Klidny, pohodovy, vse pozoruje... ale kdyz je potreba, vystartuje.',
-    description: 'Neleka se, nenecha se vyprovokovat, drzi si nadhled.',
-    strengths: 'Vyrovnanost, trpelivost, vernost, rozvaha',
+    traits: 'Klidný, pohodový, vše pozoruje... ale když je potřeba, vystartuje.',
+    description: 'Neleká se, nenechá se vyprovokovat, drží si nadhled.',
+    strengths: 'Vyrovnanost, trpělivost, věrnost, rozvaha',
   },
   {
     type: 'melancholik',
@@ -57,56 +57,56 @@ const PERSONALITIES: PersonalityCard[] = [
     character: 'Wednesday Addams',
     color: '#a855f7',
     icon: '\uD83D\uDDA4',
-    traits: 'Citliva, premysliva, introvertni, presna.',
-    description: 'Ma rada svuj svet, detail, poradek a veci dotazene do konce.',
-    strengths: 'Kreativita, disciplina, schopnost soustredeni',
+    traits: 'Citlivá, přemýšlivá, introvertní, přesná.',
+    description: 'Má ráda svůj svět, detaily, pořádek a věci dotažené do konce.',
+    strengths: 'Kreativita, disciplína, schopnost soustředění',
   },
 ];
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    question: 'Kdyz prijdes na party, co udelás jako prvni?',
+    question: 'Když přijdeš na párty, co uděláš jako první?',
     options: [
-      { text: 'Hned se dám do reci se vsemi!', type: 'sangvinik' },
-      { text: 'Organizuji nejaky program nebo soutez.', type: 'cholerik' },
-      { text: 'Najdu si klidne misto a pozoruji.', type: 'flegmatik' },
-      { text: 'Hledam jednoho dobreho kamarada na povidani.', type: 'melancholik' },
+      { text: 'Hned se dám do řeči se všemi!', type: 'sangvinik' },
+      { text: 'Organizuji nějaký program nebo soutěž.', type: 'cholerik' },
+      { text: 'Najdu si klidné místo a pozoruji.', type: 'flegmatik' },
+      { text: 'Hledám jednoho dobrého kamaráda na povídání.', type: 'melancholik' },
     ],
   },
   {
-    question: 'Ve skole dostanes tezky ukol. Co udelás?',
+    question: 'Ve škole dostaneš těžký úkol. Co uděláš?',
     options: [
-      { text: 'Udelam z toho spolecny projekt se spoluzaky!', type: 'sangvinik' },
-      { text: 'Hned se do toho pustim, chci byt prvni hotov.', type: 'cholerik' },
-      { text: 'Klidne si to promyslim a postupne to udelam.', type: 'flegmatik' },
-      { text: 'Pecelive si vse napromyslim a udelam to precizne.', type: 'melancholik' },
+      { text: 'Udělám z toho společný projekt se spolužáky!', type: 'sangvinik' },
+      { text: 'Hned se do toho pustím, chci být první hotov.', type: 'cholerik' },
+      { text: 'Klidně si to promyslím a postupně to udělám.', type: 'flegmatik' },
+      { text: 'Pečlivě si vše promyslím a udělám to precizně.', type: 'melancholik' },
     ],
   },
   {
-    question: 'Jaky film by sis vybral/a?',
+    question: 'Jaký film by sis vybral/a?',
     options: [
-      { text: 'Komedii, kde se porad smejeme.', type: 'sangvinik' },
-      { text: 'Akcni film s hrdinou, ktery zachrani svet.', type: 'cholerik' },
-      { text: 'Dobrodruzi film o cestovani.', type: 'flegmatik' },
-      { text: 'Tajemny pribeh s hlubokym smyslem.', type: 'melancholik' },
+      { text: 'Komedii, kde se pořád smějeme.', type: 'sangvinik' },
+      { text: 'Akční film s hrdinou, který zachrání svět.', type: 'cholerik' },
+      { text: 'Dobrodružný film o cestování.', type: 'flegmatik' },
+      { text: 'Tajemný příběh s hlubokým smyslem.', type: 'melancholik' },
     ],
   },
   {
-    question: 'Tvuj kamarad je smutny. Co udelás?',
+    question: 'Tvůj kamarád je smutný. Co uděláš?',
     options: [
-      { text: 'Rozveselim ho vtipem a navrhnu neco zabavneho.', type: 'sangvinik' },
-      { text: 'Reknu mu, at se sebere a pomůžu mu to vyresit!', type: 'cholerik' },
-      { text: 'Sednu si k nemu a proste tam budu.', type: 'flegmatik' },
-      { text: 'Zeptam se, co se stalo, a pozorne posloucham.', type: 'melancholik' },
+      { text: 'Rozveselím ho vtipem a navrhnu něco zábavného.', type: 'sangvinik' },
+      { text: 'Řeknu mu, ať se sebere a pomůžu mu to vyřešit!', type: 'cholerik' },
+      { text: 'Sednu si k němu a prostě tam budu.', type: 'flegmatik' },
+      { text: 'Zeptám se, co se stalo, a pozorně poslouchám.', type: 'melancholik' },
     ],
   },
   {
-    question: 'Mas volny vikend. Co udelás?',
+    question: 'Máš volný víkend. Co uděláš?',
     options: [
-      { text: 'Svolam vsechny kamarady a udelame velkou akci!', type: 'sangvinik' },
-      { text: 'Zkusim neco noveho - sport, vyzvu, dobroduzstvi!', type: 'cholerik' },
-      { text: 'Odpocinu si, prectu knizku, uziji si klid.', type: 'flegmatik' },
-      { text: 'Budu tvorit - malovat, psat, nebo vymyslet neco.', type: 'melancholik' },
+      { text: 'Svolám všechny kamarády a uděláme velkou akci!', type: 'sangvinik' },
+      { text: 'Zkusím něco nového - sport, výzvu, dobrodružství!', type: 'cholerik' },
+      { text: 'Odpočinu si, přečtu knížku, užiji si klid.', type: 'flegmatik' },
+      { text: 'Budu tvořit - malovat, psát, nebo vymyslet něco.', type: 'melancholik' },
     ],
   },
 ];
@@ -158,14 +158,14 @@ export default function LittleHeroes() {
 
   return (
     <div className={styles.container}>
-      <PlanetHeader name="Mali Hrdinove" icon="🦸" color="#10b981" />
+      <PlanetHeader name="Malí Hrdinové" icon="🦸" color="#10b981" />
 
       <div className={styles.content}>
         {/* Intro */}
         <div className={styles.intro}>
-          <h2 className={styles.introTitle}>Mali Hrdinove - Kdo jsi ty?</h2>
+          <h2 className={styles.introTitle}>Malí Hrdinové - Kdo jsi ty?</h2>
           <p className={styles.introText}>
-            Kazdy z nas ma vsechny ctyri postavicky. A vsechny jsou v poradku! Ale jedna nebo dve vzdy prevazuji - u tebe i u tvych kamaradu, rodicu, ucitelu. A je fajn to vedet.
+            Každý z nás má všechny čtyři postavičky. A všechny jsou v pořádku! Ale jedna nebo dvě vždy převažují - u tebe i u tvých kamarádů, rodičů, učitelů. A je fajn to vědět.
           </p>
         </div>
 
@@ -197,7 +197,7 @@ export default function LittleHeroes() {
                   <p className={styles.cardDescription}>{p.description}</p>
                   <div className={styles.cardStrengths}>
                     <span className={styles.strengthsLabel} style={{ color: p.color }}>
-                      Silne stranky:
+                      Silné stránky:
                     </span>
                     <div className={styles.strengthTags}>
                       {p.strengths.split(', ').map(s => (
@@ -215,7 +215,7 @@ export default function LittleHeroes() {
               )}
 
               <span className={styles.expandHint}>
-                {expandedCard === p.type ? 'Klikni pro zavreni' : 'Klikni pro vice'}
+                {expandedCard === p.type ? 'Klikni pro zavření' : 'Klikni pro více'}
               </span>
             </div>
           ))}
@@ -225,7 +225,7 @@ export default function LittleHeroes() {
         <div className={styles.quizSection}>
           {!showQuiz && !quizResult && (
             <button className={styles.startQuizBtn} onClick={startQuiz}>
-              &#127919; Ktery hrdina jsi ty? Zjisti to!
+              &#127919; Který hrdina jsi ty? Zjisti to!
             </button>
           )}
 
@@ -311,7 +311,7 @@ export default function LittleHeroes() {
                   Jsi {resultPersonality.name}!
                 </h2>
                 <p className={styles.resultCharacter}>
-                  Tvuj hrdina: {resultPersonality.character}
+                  Tvůj hrdina: {resultPersonality.character}
                 </p>
                 <p className={styles.resultTraits}>{resultPersonality.traits}</p>
                 <p className={styles.resultDescription}>{resultPersonality.description}</p>
@@ -320,7 +320,7 @@ export default function LittleHeroes() {
                     className={styles.strengthsLabel}
                     style={{ color: resultPersonality.color }}
                   >
-                    Tve superschopnosti:
+                    Tvé superschopnosti:
                   </span>
                   <div className={styles.strengthTags}>
                     {resultPersonality.strengths.split(', ').map(s => (

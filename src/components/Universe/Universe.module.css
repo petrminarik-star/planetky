@@ -81,6 +81,7 @@
   position: absolute;
   border-radius: 50%;
   animation: orbitSpin linear infinite;
+  pointer-events: none;
   /* width, height, animationDuration set via inline style */
 }
 
@@ -110,6 +111,7 @@
   /* counter-rotate so the planet icon stays upright */
   animation: counterSpin linear infinite;
   z-index: 5;
+  pointer-events: auto;
   -webkit-tap-highlight-color: transparent;
 }
 

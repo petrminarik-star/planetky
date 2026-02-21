@@ -118,7 +118,7 @@ export default function CreateSubject() {
 
   return (
     <div className={styles.container}>
-      <PlanetHeader name="Vytvor si predmet" icon="\uD83D\uDCDA" color="#00CED1" />
+      <PlanetHeader name="Vytvoř si předmět" icon="\uD83D\uDCDA" color="#00CED1" />
 
       <div className={styles.content}>
         {/* === LIST VIEW === */}
@@ -126,14 +126,14 @@ export default function CreateSubject() {
           <div className={styles.listView}>
             <button className={styles.createButton} onClick={openNewForm}>
               <span className={styles.createIcon}>+</span>
-              Vytvorit novy predmet
+              Vytvořit nový předmět
             </button>
 
             {subjects.length === 0 ? (
               <div className={styles.emptyState}>
                 <span className={styles.emptyIcon}>{'\uD83D\uDCDA'}</span>
                 <p className={styles.emptyText}>
-                  Zatim jsi nevytvoril/a zadny predmet. Vymysli svuj vlastni!
+                  Zatím jsi nevytvořil/a žádný předmět. Vymysli svůj vlastní!
                 </p>
               </div>
             ) : (
@@ -187,12 +187,12 @@ export default function CreateSubject() {
         {view === 'form' && (
           <div className={styles.formView}>
             <h2 className={styles.formTitle}>
-              {editingId ? 'Upravit predmet' : 'Novy predmet'}
+              {editingId ? 'Upravit předmět' : 'Nový předmět'}
             </h2>
 
             {/* Logo selector */}
             <div className={styles.logoSection}>
-              <label className={styles.label}>Logo predmetu</label>
+              <label className={styles.label}>Logo předmětu</label>
               <div className={styles.logoRow}>
                 <button
                   className={styles.currentLogo}
@@ -201,7 +201,7 @@ export default function CreateSubject() {
                 >
                   {form.logo}
                 </button>
-                <span className={styles.logoHint}>Klikni pro zmenu</span>
+                <span className={styles.logoHint}>Klikni pro změnu</span>
               </div>
 
               {showEmojiPicker && (
@@ -224,7 +224,7 @@ export default function CreateSubject() {
                       type="text"
                       value={customEmoji}
                       onChange={(e) => setCustomEmoji(e.target.value)}
-                      placeholder="Vlastni emoji..."
+                      placeholder="Vlastní emoji..."
                       maxLength={4}
                     />
                     <button
@@ -240,69 +240,69 @@ export default function CreateSubject() {
             </div>
 
             <div className={styles.formGroup}>
-              <label className={styles.label}>Nazev predmetu *</label>
+              <label className={styles.label}>Název předmětu *</label>
               <input
                 className={styles.input}
                 type="text"
                 value={form.name}
                 onChange={(e) => updateField('name', e.target.value)}
-                placeholder="Jak se tvuj predmet jmenuje?"
+                placeholder="Jak se tvůj předmět jmenuje?"
                 maxLength={80}
                 autoFocus
               />
             </div>
 
             <div className={styles.formGroup}>
-              <label className={styles.label}>Co se v predmetu uci</label>
+              <label className={styles.label}>Co se v předmětu učí</label>
               <textarea
                 className={styles.textarea}
                 value={form.whatToLearn}
                 onChange={(e) => updateField('whatToLearn', e.target.value)}
-                placeholder="Co zajimaveho se v nem naucis?"
+                placeholder="Co zajímavého se v něm naučíš?"
                 rows={3}
               />
             </div>
 
             <div className={styles.formGroup}>
-              <label className={styles.label}>Jak bude vypadat vyuka</label>
+              <label className={styles.label}>Jak bude vypadat výuka</label>
               <textarea
                 className={styles.textarea}
                 value={form.howTeaching}
                 onChange={(e) => updateField('howTeaching', e.target.value)}
-                placeholder="Kde se bude ucit? Jake aktivity budou?"
+                placeholder="Kde se bude učit? Jaké aktivity budou?"
                 rows={3}
               />
             </div>
 
             <div className={styles.formGroup}>
-              <label className={styles.label}>Jake pomucky se budou pouzivat</label>
+              <label className={styles.label}>Jaké pomůcky se budou používat</label>
               <textarea
                 className={styles.textarea}
                 value={form.tools}
                 onChange={(e) => updateField('tools', e.target.value)}
-                placeholder="Sesity, tablety, pokusy, priroda...?"
+                placeholder="Sešity, tablety, pokusy, příroda...?"
                 rows={2}
               />
             </div>
 
             <div className={styles.formGroup}>
-              <label className={styles.label}>Co by ses mel naucit za rok</label>
+              <label className={styles.label}>Co by ses měl naučit za rok</label>
               <textarea
                 className={styles.textarea}
                 value={form.goalOneYear}
                 onChange={(e) => updateField('goalOneYear', e.target.value)}
-                placeholder="Co zvladnes za prvni rok?"
+                placeholder="Co zvládneš za první rok?"
                 rows={2}
               />
             </div>
 
             <div className={styles.formGroup}>
-              <label className={styles.label}>Co by ses mel naucit za 4 roky</label>
+              <label className={styles.label}>Co by ses měl naučit za 4 roky</label>
               <textarea
                 className={styles.textarea}
                 value={form.goalFourYears}
                 onChange={(e) => updateField('goalFourYears', e.target.value)}
-                placeholder="A co za ctyri roky?"
+                placeholder="A co za čtyři roky?"
                 rows={2}
               />
             </div>
@@ -313,20 +313,20 @@ export default function CreateSubject() {
                 onClick={() => setView('preview')}
                 disabled={!isFormValid}
               >
-                Nahled
+                Náhled
               </button>
               <button
                 className={styles.saveFormButton}
                 onClick={saveSubject}
                 disabled={!isFormValid}
               >
-                {editingId ? 'Ulozit zmeny' : 'Ulozit predmet'}
+                {editingId ? 'Uložit změny' : 'Uložit předmět'}
               </button>
               <button
                 className={styles.cancelFormButton}
                 onClick={() => setView('list')}
               >
-                Zrusit
+                Zrušit
               </button>
             </div>
           </div>
@@ -338,40 +338,40 @@ export default function CreateSubject() {
             <div className={styles.previewCard}>
               <div className={styles.previewHeader}>
                 <span className={styles.previewLogo}>{form.logo}</span>
-                <h2 className={styles.previewName}>{form.name || 'Nazev predmetu'}</h2>
+                <h2 className={styles.previewName}>{form.name || 'Název předmětu'}</h2>
               </div>
 
               {form.whatToLearn && (
                 <div className={styles.previewSection}>
-                  <h4 className={styles.previewLabel}>{'\uD83D\uDCD6'} Co se uci</h4>
+                  <h4 className={styles.previewLabel}>{'\uD83D\uDCD6'} Co se učí</h4>
                   <p className={styles.previewText}>{form.whatToLearn}</p>
                 </div>
               )}
 
               {form.howTeaching && (
                 <div className={styles.previewSection}>
-                  <h4 className={styles.previewLabel}>{'\uD83C\uDFEB'} Jak probiha vyuka</h4>
+                  <h4 className={styles.previewLabel}>{'\uD83C\uDFEB'} Jak probíhá výuka</h4>
                   <p className={styles.previewText}>{form.howTeaching}</p>
                 </div>
               )}
 
               {form.tools && (
                 <div className={styles.previewSection}>
-                  <h4 className={styles.previewLabel}>{'\uD83D\uDEE0\uFE0F'} Pomucky</h4>
+                  <h4 className={styles.previewLabel}>{'\uD83D\uDEE0\uFE0F'} Pomůcky</h4>
                   <p className={styles.previewText}>{form.tools}</p>
                 </div>
               )}
 
               {form.goalOneYear && (
                 <div className={styles.previewSection}>
-                  <h4 className={styles.previewLabel}>{'\uD83C\uDFAF'} Cil za 1 rok</h4>
+                  <h4 className={styles.previewLabel}>{'\uD83C\uDFAF'} Cíl za 1 rok</h4>
                   <p className={styles.previewText}>{form.goalOneYear}</p>
                 </div>
               )}
 
               {form.goalFourYears && (
                 <div className={styles.previewSection}>
-                  <h4 className={styles.previewLabel}>{'\uD83D\uDE80'} Cil za 4 roky</h4>
+                  <h4 className={styles.previewLabel}>{'\uD83D\uDE80'} Cíl za 4 roky</h4>
                   <p className={styles.previewText}>{form.goalFourYears}</p>
                 </div>
               )}
@@ -382,20 +382,20 @@ export default function CreateSubject() {
                 className={styles.backToFormButton}
                 onClick={() => setView('form')}
               >
-                Zpet na formular
+                Zpět na formulář
               </button>
               <button
                 className={styles.saveFromPreviewButton}
                 onClick={saveSubject}
                 disabled={!isFormValid}
               >
-                {editingId ? 'Ulozit zmeny' : 'Ulozit predmet'}
+                {editingId ? 'Uložit změny' : 'Uložit předmět'}
               </button>
               <button
                 className={styles.backToListButton}
                 onClick={() => setView('list')}
               >
-                Zpet na seznam
+                Zpět na seznam
               </button>
             </div>
           </div>

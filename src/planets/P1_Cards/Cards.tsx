@@ -52,20 +52,20 @@ export default function Cards() {
 
   return (
     <div className={styles.container}>
-      <PlanetHeader name="Karticky" icon="&#x1F0CF;" color="#FFD700" />
+      <PlanetHeader name="Kartičky" icon="&#x1F0CF;" color="#FFD700" />
 
       <div className={styles.content}>
         {!drawnCard ? (
           <>
             <p className={styles.intro}>
-              Vyber si balicek a vytahni si svou karticky!
+              Vyber si balíček a vytáhni si svou kartičku!
             </p>
             <div className={styles.decksRow}>
               {/* Morning Deck */}
               <button
                 className={`${styles.deckStack} ${styles.morningDeck}`}
                 onClick={() => drawCard('morning')}
-                aria-label="Ranni karticky"
+                aria-label="Ranní kartičky"
               >
                 <div className={styles.deckCard3} />
                 <div className={styles.deckCard2} />
@@ -76,14 +76,14 @@ export default function Cards() {
                     <span className={styles.deckStar2}>&#x2B50;</span>
                   </div>
                 </div>
-                <span className={styles.deckLabel}>Ranni karticky</span>
+                <span className={styles.deckLabel}>Ranní kartičky</span>
               </button>
 
               {/* Evening Deck */}
               <button
                 className={`${styles.deckStack} ${styles.eveningDeck}`}
                 onClick={() => drawCard('evening')}
-                aria-label="Vecerni karticky"
+                aria-label="Večerní kartičky"
               >
                 <div className={styles.deckCard3} />
                 <div className={styles.deckCard2} />
@@ -94,7 +94,7 @@ export default function Cards() {
                     <span className={styles.deckStar2}>&#x2B50;</span>
                   </div>
                 </div>
-                <span className={styles.deckLabel}>Vecerni karticky</span>
+                <span className={styles.deckLabel}>Večerní kartičky</span>
               </button>
             </div>
           </>
@@ -144,13 +144,13 @@ export default function Cards() {
                   setTimeout(() => drawCard(drawnCard.deck), 500);
                 }}
               >
-                Dalsi karticka
+                Další kartička
               </button>
               <button
                 className={styles.backToDeckButton}
                 onClick={resetCard}
               >
-                Zpet na balicky
+                Zpět na balíčky
               </button>
             </div>
           </div>
