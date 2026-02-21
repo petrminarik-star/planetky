@@ -1,0 +1,949 @@
+/* =============================================
+   AntiStress Planet - Main Container
+   ============================================= */
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #0a0a2e 0%, #0a1a1e 40%, #0a0a2e 100%);
+  overflow: hidden;
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 24px 40px;
+}
+
+/* =============================================
+   Sub-Planet Menu (main view with 5 moonlets)
+   ============================================= */
+
+.menuWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  padding-top: 16px;
+  animation: fadeIn 0.5s ease;
+}
+
+.menuIntro {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #c8e6c9;
+  text-align: center;
+  text-shadow: 0 0 16px rgba(152, 251, 152, 0.3);
+}
+
+.moonGrid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 28px;
+  max-width: 520px;
+}
+
+.moonButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  animation: moonAppear 0.5s ease backwards;
+  padding: 8px;
+}
+
+.moonButton:hover {
+  transform: translateY(-6px) scale(1.05);
+}
+
+.moonButton:active {
+  transform: translateY(-2px) scale(0.97);
+}
+
+.moonOrb {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.3),
+    0 0 40px var(--moon-color, #ffffff)33;
+  transition: box-shadow 0.3s ease;
+  animation: float 4s ease-in-out infinite;
+}
+
+.moonButton:hover .moonOrb {
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 0 60px var(--moon-color, #ffffff)55;
+}
+
+.moonEmoji {
+  font-size: 2rem;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+}
+
+.moonLabel {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #d0d0e8;
+  text-align: center;
+  max-width: 90px;
+  line-height: 1.3;
+}
+
+@keyframes moonAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.5) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* =============================================
+   Section Wrapper (inside a sub-planet)
+   ============================================= */
+
+.sectionWrapper {
+  animation: fadeIn 0.3s ease;
+}
+
+.sectionBack {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #d0d0e8;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 20px;
+}
+
+.sectionBack:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.sectionDesc {
+  font-size: 1.05rem;
+  color: #b8b8d4;
+  text-align: center;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+/* =============================================
+   1. Meditace
+   ============================================= */
+
+.meditace {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timerOptions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.timerOptionBtn {
+  padding: 14px 28px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(123, 104, 238, 0.2) 0%, rgba(123, 104, 238, 0.1) 100%);
+  border: 1px solid rgba(123, 104, 238, 0.4);
+  color: #c8b8ff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.timerOptionBtn:hover {
+  background: linear-gradient(135deg, rgba(123, 104, 238, 0.35) 0%, rgba(123, 104, 238, 0.2) 100%);
+  border-color: rgba(123, 104, 238, 0.7);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(123, 104, 238, 0.25);
+}
+
+.meditaceActive {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.meditaceCircle {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, #7b68ee, #483d8b88, #191970);
+  transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+  box-shadow: 0 0 40px rgba(123, 104, 238, 0.4), 0 0 80px rgba(123, 104, 238, 0.15);
+  animation: meditacePulse 4s ease-in-out infinite;
+}
+
+@keyframes meditacePulse {
+  0%, 100% { box-shadow: 0 0 40px rgba(123, 104, 238, 0.4), 0 0 80px rgba(123, 104, 238, 0.15); }
+  50% { box-shadow: 0 0 60px rgba(123, 104, 238, 0.6), 0 0 120px rgba(123, 104, 238, 0.25); }
+}
+
+.timerText {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #c8b8ff;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 20px rgba(123, 104, 238, 0.5);
+}
+
+.meditaceHint {
+  font-size: 1rem;
+  color: #b8b8d4;
+  font-style: italic;
+}
+
+.meditaceDone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  animation: fadeIn 0.5s ease;
+}
+
+.doneEmoji {
+  font-size: 4rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.doneText {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #c8e6c9;
+  text-shadow: 0 0 16px rgba(152, 251, 152, 0.3);
+}
+
+/* =============================================
+   2. Dychani (Breathing)
+   ============================================= */
+
+.dychani {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.startBreathBtn {
+  padding: 16px 36px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #48d1cc 0%, #20b2aa 100%);
+  color: #ffffff;
+  font-size: 1.15rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 24px rgba(72, 209, 204, 0.35);
+}
+
+.startBreathBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(72, 209, 204, 0.5);
+}
+
+.breathActive {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.breathCircleWrapper {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.breathCircle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transition: transform ease-in-out, box-shadow ease-in-out;
+}
+
+.breathInhale {
+  background: radial-gradient(circle at 40% 40%, #48d1cc, #20b2aa88, #00808066);
+  transform: scale(1);
+  animation: breatheIn 4s ease-in-out forwards;
+  box-shadow: 0 0 40px rgba(72, 209, 204, 0.5), 0 0 80px rgba(72, 209, 204, 0.2);
+}
+
+.breathExhale {
+  background: radial-gradient(circle at 40% 40%, #48d1ccaa, #20b2aa66, #00808044);
+  transform: scale(1);
+  animation: breatheOut 6s ease-in-out forwards;
+  box-shadow: 0 0 20px rgba(72, 209, 204, 0.3), 0 0 40px rgba(72, 209, 204, 0.1);
+}
+
+@keyframes breatheIn {
+  from { transform: scale(0.5); }
+  to { transform: scale(1); }
+}
+
+@keyframes breatheOut {
+  from { transform: scale(1); }
+  to { transform: scale(0.5); }
+}
+
+.breathCountdown {
+  position: absolute;
+  font-size: 3rem;
+  font-weight: 800;
+  color: #ffffff;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+  z-index: 2;
+}
+
+.breathPhaseText {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #80edd5;
+  text-shadow: 0 0 12px rgba(72, 209, 204, 0.3);
+}
+
+.breathCycles {
+  font-size: 0.9rem;
+  color: #b8b8d4;
+}
+
+/* =============================================
+   3. Afirmace (Affirmations)
+   ============================================= */
+
+.afirmace {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.affirmationCard {
+  max-width: 400px;
+  width: 100%;
+  background: linear-gradient(160deg, rgba(255, 105, 180, 0.12) 0%, rgba(255, 105, 180, 0.04) 100%);
+  border: 1px solid rgba(255, 105, 180, 0.25);
+  border-radius: 24px;
+  padding: 40px 32px;
+  text-align: center;
+  margin-bottom: 24px;
+  transition: all 0.3s ease;
+  animation: cardSlideIn 0.3s ease;
+}
+
+.affirmationOut {
+  opacity: 0;
+  transform: translateY(-12px) scale(0.96);
+}
+
+@keyframes cardSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.affirmationText {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #ffd0e8;
+  line-height: 1.6;
+  text-shadow: 0 0 16px rgba(255, 105, 180, 0.2);
+}
+
+/* =============================================
+   4. Radostne karticky (Joy Cards)
+   ============================================= */
+
+.radost {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.joyCard {
+  max-width: 400px;
+  width: 100%;
+  background: linear-gradient(160deg, rgba(255, 215, 0, 0.12) 0%, rgba(255, 215, 0, 0.04) 100%);
+  border: 1px solid rgba(255, 215, 0, 0.25);
+  border-radius: 24px;
+  padding: 40px 32px;
+  text-align: center;
+  margin-bottom: 24px;
+  transition: all 0.3s ease;
+  animation: cardSlideIn 0.3s ease;
+}
+
+.joyCardOut {
+  opacity: 0;
+  transform: translateY(-12px) scale(0.96);
+}
+
+.joyCardText {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fff3c8;
+  line-height: 1.6;
+  text-shadow: 0 0 16px rgba(255, 215, 0, 0.2);
+}
+
+/* =============================================
+   Shared card button
+   ============================================= */
+
+.nextCardBtn {
+  padding: 14px 32px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(152, 251, 152, 0.2) 0%, rgba(152, 251, 152, 0.1) 100%);
+  border: 1px solid rgba(152, 251, 152, 0.4);
+  color: #c8e6c9;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.nextCardBtn:hover {
+  background: linear-gradient(135deg, rgba(152, 251, 152, 0.3) 0%, rgba(152, 251, 152, 0.15) 100%);
+  border-color: rgba(152, 251, 152, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(152, 251, 152, 0.2);
+}
+
+/* =============================================
+   Shared buttons
+   ============================================= */
+
+.stopBtn,
+.resetBtn {
+  padding: 12px 28px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #d0d0e8;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.stopBtn:hover,
+.resetBtn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+}
+
+/* =============================================
+   5. Talisman
+   ============================================= */
+
+.talisman {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 480px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Talisman Preview */
+
+.talismanPreview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  margin-bottom: 24px;
+}
+
+.talismanShape {
+  width: 140px;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 3px solid;
+  background: rgba(255, 255, 255, 0.04);
+  transition: all 0.3s ease;
+  animation: float 3s ease-in-out infinite;
+}
+
+.shape_circle {
+  border-radius: 50%;
+}
+
+.shape_star {
+  border-radius: 4px;
+  clip-path: polygon(
+    50% 0%, 61% 35%, 98% 35%, 68% 57%,
+    79% 91%, 50% 70%, 21% 91%, 32% 57%,
+    2% 35%, 39% 35%
+  );
+  border: none;
+  background: rgba(255, 255, 255, 0.06);
+  width: 150px;
+  height: 150px;
+}
+
+.shape_heart {
+  border-radius: 0;
+  border: none;
+  background: rgba(255, 255, 255, 0.04);
+  clip-path: path('M70 130 C70 130 140 80 140 45 C140 20 115 0 90 0 C78 0 70 10 70 10 C70 10 62 0 50 0 C25 0 0 20 0 45 C0 80 70 130 70 130 Z');
+  width: 140px;
+  height: 140px;
+}
+
+.shape_diamond {
+  border-radius: 4px;
+  transform: rotate(45deg);
+  width: 110px;
+  height: 110px;
+}
+
+.shape_diamond .talismanEmoji,
+.shape_diamond .talismanText {
+  transform: rotate(-45deg);
+}
+
+.shape_diamond .talismanEmojiSmall,
+.shape_diamond .talismanTextSmall {
+  transform: rotate(-45deg);
+}
+
+.talismanEmoji {
+  font-size: 2.5rem;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+}
+
+.talismanText {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-align: center;
+  max-width: 100px;
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+/* Talisman Options */
+
+.optionGroup {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.optionLabel {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #b8b8d4;
+  margin-bottom: 8px;
+}
+
+.optionRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.optionBtn {
+  padding: 8px 14px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #d0d0e8;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.optionBtn:hover {
+  background: rgba(255, 107, 107, 0.12);
+  border-color: rgba(255, 107, 107, 0.3);
+}
+
+.optionActive {
+  background: rgba(255, 107, 107, 0.2);
+  border-color: rgba(255, 107, 107, 0.5);
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(255, 107, 107, 0.15);
+}
+
+.colorRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.colorBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.colorBtn:hover {
+  transform: scale(1.15);
+}
+
+.colorActive {
+  border-color: #ffffff;
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.3);
+  transform: scale(1.15);
+}
+
+.emojiBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.emojiBtn:hover {
+  background: rgba(255, 107, 107, 0.12);
+  border-color: rgba(255, 107, 107, 0.3);
+  transform: scale(1.1);
+}
+
+.emojiBtnActive {
+  background: rgba(255, 107, 107, 0.2);
+  border-color: rgba(255, 107, 107, 0.5);
+  box-shadow: 0 0 12px rgba(255, 107, 107, 0.15);
+}
+
+.talismanInput {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.talismanInput:focus {
+  outline: none;
+  border-color: rgba(255, 107, 107, 0.5);
+  box-shadow: 0 0 16px rgba(255, 107, 107, 0.1);
+}
+
+.talismanInput::placeholder {
+  color: rgba(184, 184, 212, 0.5);
+}
+
+.talismanActions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.saveTalismanBtn {
+  flex: 1;
+  padding: 14px 24px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #ff6b6b 0%, #cc5555 100%);
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 24px rgba(255, 107, 107, 0.3);
+}
+
+.saveTalismanBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(255, 107, 107, 0.45);
+}
+
+.showSavedBtn {
+  padding: 14px 24px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #d0d0e8;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.showSavedBtn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+}
+
+.backToCreatorBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #d0d0e8;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 16px;
+  align-self: flex-start;
+}
+
+.backToCreatorBtn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+}
+
+/* Saved Talismans Grid */
+
+.savedGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+
+.savedTalisman {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  transition: all 0.2s ease;
+}
+
+.savedTalisman:hover {
+  border-color: rgba(255, 107, 107, 0.3);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.talismanShapeSmall {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  border: 2px solid;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.talismanShapeSmall.shape_circle {
+  border-radius: 50%;
+}
+
+.talismanShapeSmall.shape_star {
+  clip-path: polygon(
+    50% 0%, 61% 35%, 98% 35%, 68% 57%,
+    79% 91%, 50% 70%, 21% 91%, 32% 57%,
+    2% 35%, 39% 35%
+  );
+  border: none;
+  background: rgba(255, 255, 255, 0.06);
+  width: 90px;
+  height: 90px;
+}
+
+.talismanShapeSmall.shape_heart {
+  border: none;
+  background: rgba(255, 255, 255, 0.04);
+  clip-path: path('M40 75 C40 75 80 46 80 26 C80 12 66 0 52 0 C45 0 40 6 40 6 C40 6 35 0 28 0 C14 0 0 12 0 26 C0 46 40 75 40 75 Z');
+  width: 80px;
+  height: 80px;
+}
+
+.talismanShapeSmall.shape_diamond {
+  transform: rotate(45deg);
+  width: 65px;
+  height: 65px;
+  border-radius: 4px;
+}
+
+.talismanEmojiSmall {
+  font-size: 1.5rem;
+}
+
+.talismanTextSmall {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-align: center;
+  max-width: 60px;
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+.deleteTalismanBtn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(255, 80, 80, 0.2);
+  border: 1px solid rgba(255, 80, 80, 0.3);
+  color: #ff8888;
+  font-size: 0.7rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.savedTalisman:hover .deleteTalismanBtn {
+  opacity: 1;
+}
+
+.deleteTalismanBtn:hover {
+  background: rgba(255, 80, 80, 0.4);
+  color: #ffffff;
+}
+
+/* =============================================
+   Animations
+   ============================================= */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+/* Keep diamond float special (needs rotation kept) */
+.shape_diamond.talismanShape {
+  animation: floatDiamond 3s ease-in-out infinite;
+}
+
+@keyframes floatDiamond {
+  0%, 100% { transform: rotate(45deg) translateY(0); }
+  50% { transform: rotate(45deg) translateY(-8px); }
+}
+
+/* =============================================
+   Responsive
+   ============================================= */
+
+@media (max-width: 600px) {
+  .content {
+    padding: 16px;
+  }
+
+  .moonGrid {
+    gap: 20px;
+  }
+
+  .moonOrb {
+    width: 64px;
+    height: 64px;
+  }
+
+  .moonEmoji {
+    font-size: 1.6rem;
+  }
+
+  .moonLabel {
+    font-size: 0.78rem;
+  }
+
+  .talismanShape {
+    width: 110px;
+    height: 110px;
+  }
+
+  .shape_star.talismanShape {
+    width: 120px;
+    height: 120px;
+  }
+
+  .talismanEmoji {
+    font-size: 2rem;
+  }
+
+  .breathCircleWrapper {
+    width: 160px;
+    height: 160px;
+  }
+
+  .meditaceCircle {
+    width: 140px;
+    height: 140px;
+  }
+
+  .savedGrid {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  }
+}

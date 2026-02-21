@@ -1,0 +1,462 @@
+/* ===== Little Heroes - Planet 8 ===== */
+
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #021a10 0%, #042f1c 30%, #064e32 60%, #021a10 100%);
+  color: #d1fae5;
+  overflow-x: hidden;
+}
+
+.content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem 3rem;
+}
+
+/* ===== Intro ===== */
+.intro {
+  text-align: center;
+  padding: 1.5rem 1rem 2rem;
+  margin-bottom: 2rem;
+}
+
+.introTitle {
+  font-size: 2rem;
+  background: linear-gradient(to right, #34d399, #10b981, #34d399);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+}
+
+.introText {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #a7f3d0;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+/* ===== Personality Cards Grid ===== */
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.2rem;
+  margin-bottom: 2.5rem;
+}
+
+.personalityCard {
+  background: rgba(16, 185, 129, 0.06);
+  border: 2px solid rgba(16, 185, 129, 0.2);
+  border-radius: 20px;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  position: relative;
+}
+
+.personalityCard:hover {
+  transform: translateY(-4px);
+}
+
+.personalityCardExpanded {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 640px) {
+  .personalityCardExpanded {
+    grid-column: span 1;
+  }
+}
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.cardIcon {
+  font-size: 3rem;
+  line-height: 1;
+  animation: float 3s ease-in-out infinite;
+}
+
+.cardName {
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+.cardCharacter {
+  font-size: 0.9rem;
+  color: #6ee7b7;
+  font-weight: 500;
+}
+
+.cardTraits {
+  font-size: 1rem;
+  color: #a7f3d0;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Expanded content */
+.cardExpanded {
+  animation: expandIn 0.35s ease;
+}
+
+.cardDivider {
+  height: 2px;
+  border-radius: 1px;
+  margin: 1rem 0;
+  opacity: 0.4;
+}
+
+.cardDescription {
+  font-size: 1rem;
+  color: #d1fae5;
+  line-height: 1.6;
+  margin: 0 0 1rem;
+}
+
+.cardStrengths {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.strengthsLabel {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.strengthTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.strengthTag {
+  padding: 0.35rem 0.8rem;
+  border: 1.5px solid;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.expandHint {
+  display: block;
+  margin-top: 0.8rem;
+  font-size: 0.8rem;
+  color: rgba(167, 243, 208, 0.4);
+  text-align: center;
+}
+
+/* ===== Quiz Section ===== */
+.quizSection {
+  margin-top: 1rem;
+}
+
+.startQuizBtn {
+  display: block;
+  margin: 0 auto;
+  padding: 1rem 2.5rem;
+  border-radius: 16px;
+  border: none;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 25px rgba(16, 185, 129, 0.4);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.startQuizBtn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 35px rgba(16, 185, 129, 0.5);
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 4px 25px rgba(16, 185, 129, 0.4); }
+  50% { box-shadow: 0 4px 35px rgba(16, 185, 129, 0.6); }
+}
+
+/* Quiz card */
+.quizCard {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.05));
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 24px;
+  padding: 2rem;
+  animation: fadeSlideIn 0.4s ease;
+}
+
+/* Quiz progress */
+.quizProgress {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1.8rem;
+}
+
+.quizProgressBar {
+  flex: 1;
+  height: 8px;
+  background: rgba(16, 185, 129, 0.15);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.quizProgressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #059669, #10b981, #34d399);
+  border-radius: 8px;
+  transition: width 0.4s ease;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+}
+
+.quizProgressText {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #10b981;
+  min-width: 40px;
+  text-align: right;
+}
+
+.quizQuestion {
+  font-size: 1.4rem;
+  color: #d1fae5;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.quizOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.quizOption {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem 1.2rem;
+  border-radius: 14px;
+  border: 2px solid rgba(16, 185, 129, 0.2);
+  background: rgba(2, 26, 16, 0.5);
+  color: #a7f3d0;
+  font-size: 1.05rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.quizOption:hover {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+  transform: translateX(6px);
+  color: #d1fae5;
+}
+
+.optionLetter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  font-weight: 700;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.quizOption:hover .optionLetter {
+  background: rgba(16, 185, 129, 0.3);
+}
+
+/* ===== Result Section ===== */
+.resultSection {
+  position: relative;
+  animation: fadeSlideIn 0.5s ease;
+}
+
+.resultCard {
+  border: 2px solid;
+  border-radius: 24px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  background: rgba(2, 26, 16, 0.7);
+  position: relative;
+  z-index: 1;
+}
+
+.resultIcon {
+  font-size: 5rem;
+  display: block;
+  margin-bottom: 1rem;
+  animation: resultBounce 0.8s ease;
+}
+
+.resultTitle {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 0.3rem;
+  letter-spacing: 0.03em;
+}
+
+.resultCharacter {
+  font-size: 1.1rem;
+  color: #6ee7b7;
+  margin-bottom: 1rem;
+}
+
+.resultTraits {
+  font-size: 1.15rem;
+  color: #a7f3d0;
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.resultDescription {
+  font-size: 1.05rem;
+  color: #d1fae5;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.resultStrengths {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.retakeBtn {
+  display: block;
+  margin: 1.5rem auto 0;
+  padding: 0.7rem 1.8rem;
+  border-radius: 12px;
+  border: 2px solid rgba(16, 185, 129, 0.3);
+  background: transparent;
+  color: #6ee7b7;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.retakeBtn:hover {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+}
+
+/* ===== Celebration Animation ===== */
+.celebration {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.confetti {
+  position: absolute;
+  top: -10px;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  animation: confettiFall linear forwards;
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+.celebrationStars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.celebStar {
+  position: absolute;
+  color: #fbbf24;
+  animation: starPop 1.5s ease forwards;
+}
+
+@keyframes starPop {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  40% {
+    transform: scale(1.5) rotate(180deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* ===== Result Bounce ===== */
+@keyframes resultBounce {
+  0% { transform: scale(0); }
+  50% { transform: scale(1.3); }
+  70% { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+
+/* ===== Shared Animations ===== */
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes expandIn {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 500px;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}

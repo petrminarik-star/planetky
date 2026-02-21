@@ -1,0 +1,546 @@
+/* ===== Inventions - Planet 6 ===== */
+
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a0a00 0%, #2d1800 30%, #3d2200 60%, #1a0f00 100%);
+  color: #fde68a;
+  overflow-x: hidden;
+}
+
+.content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem 3rem;
+}
+
+/* ===== List View ===== */
+.listView {
+  animation: fadeIn 0.4s ease;
+}
+
+.listHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.listTitle {
+  font-size: 1.8rem;
+  background: linear-gradient(to right, #f59e0b, #fbbf24, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.newBtn {
+  padding: 0.7rem 1.5rem;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #1a0a00;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+}
+
+.newBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.5);
+}
+
+/* Empty state */
+.emptyState {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: rgba(245, 158, 11, 0.05);
+  border: 2px dashed rgba(245, 158, 11, 0.2);
+  border-radius: 20px;
+}
+
+.emptyIcon {
+  font-size: 4rem;
+  display: block;
+  margin-bottom: 1rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+.emptyState p {
+  font-size: 1.2rem;
+  color: #b8860b;
+  margin-bottom: 1.5rem;
+}
+
+.startBtn {
+  padding: 0.9rem 2rem;
+  border-radius: 14px;
+  border: none;
+  background: linear-gradient(135deg, #f59e0b, #fbbf24);
+  color: #1a0a00;
+  font-size: 1.15rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
+}
+
+.startBtn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 25px rgba(245, 158, 11, 0.5);
+}
+
+/* Invention grid */
+.inventionGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.inventionCard {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(217, 119, 6, 0.05));
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: 16px;
+  padding: 1.3rem;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.inventionCard:hover {
+  border-color: rgba(245, 158, 11, 0.5);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(245, 158, 11, 0.15);
+}
+
+.inventionCardIcon {
+  font-size: 2.2rem;
+  margin-bottom: 0.6rem;
+}
+
+.inventionCardTitle {
+  font-size: 1.05rem;
+  color: #fde68a;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.inventionCardDate {
+  font-size: 0.8rem;
+  color: #b8860b;
+  margin-bottom: 0.8rem;
+}
+
+.inventionCardActions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.viewBtn {
+  padding: 0.45rem 1rem;
+  border-radius: 8px;
+  border: none;
+  background: rgba(245, 158, 11, 0.2);
+  color: #fbbf24;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.viewBtn:hover {
+  background: rgba(245, 158, 11, 0.35);
+}
+
+.deleteSmBtn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+}
+
+.deleteSmBtn:hover {
+  background: rgba(239, 68, 68, 0.3);
+  transform: scale(1.1);
+}
+
+/* ===== Wizard View ===== */
+.wizard {
+  animation: fadeIn 0.4s ease;
+}
+
+/* Progress bar */
+.progressContainer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.progressBar {
+  flex: 1;
+  height: 10px;
+  background: rgba(245, 158, 11, 0.15);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #d97706, #f59e0b, #fbbf24);
+  border-radius: 10px;
+  transition: width 0.4s ease;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+}
+
+.progressText {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #f59e0b;
+  min-width: 60px;
+  text-align: right;
+}
+
+/* Question card */
+.questionCard {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(217, 119, 6, 0.05));
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: 20px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  animation: slideIn 0.35s ease;
+}
+
+.questionIcon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 1rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+.questionText {
+  font-size: 1.4rem;
+  color: #fde68a;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+.answerArea {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 2px solid rgba(245, 158, 11, 0.3);
+  background: rgba(26, 10, 0, 0.6);
+  color: #fde68a;
+  font-size: 1.05rem;
+  font-family: inherit;
+  outline: none;
+  resize: vertical;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.answerArea:focus {
+  border-color: #f59e0b;
+  box-shadow: 0 0 15px rgba(245, 158, 11, 0.2);
+}
+
+.answerArea::placeholder {
+  color: rgba(253, 230, 138, 0.4);
+}
+
+.planHint {
+  font-size: 0.85rem;
+  color: #b8860b;
+  margin-top: 0.6rem;
+  text-align: left;
+  font-style: italic;
+}
+
+/* Wizard navigation */
+.wizardNav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.prevBtn,
+.nextBtn {
+  padding: 0.8rem 1.8rem;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.prevBtn {
+  border: 2px solid rgba(245, 158, 11, 0.3);
+  background: transparent;
+  color: #fbbf24;
+}
+
+.prevBtn:hover:not(:disabled) {
+  border-color: #f59e0b;
+  background: rgba(245, 158, 11, 0.1);
+}
+
+.prevBtn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.nextBtn {
+  border: none;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #1a0a00;
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+}
+
+.nextBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.5);
+}
+
+.cancelWizardBtn {
+  display: block;
+  margin: 0 auto;
+  padding: 0.5rem 1rem;
+  border: none;
+  background: transparent;
+  color: #b8860b;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.cancelWizardBtn:hover {
+  color: #f87171;
+}
+
+/* ===== Summary View ===== */
+.summaryView {
+  animation: fadeIn 0.4s ease;
+}
+
+.summaryHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.summaryIcon {
+  font-size: 4rem;
+  display: block;
+  margin-bottom: 0.5rem;
+  animation: bounce 1s ease infinite;
+}
+
+.summaryTitle {
+  font-size: 2rem;
+  background: linear-gradient(to right, #f59e0b, #fbbf24);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.3rem;
+}
+
+.summarySubtitle {
+  color: #b8860b;
+  font-size: 1rem;
+}
+
+.summaryCards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+}
+
+.summaryCard {
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  border-radius: 14px;
+  padding: 1.1rem;
+  transition: all 0.2s ease;
+}
+
+.summaryCard:hover {
+  border-color: rgba(245, 158, 11, 0.4);
+}
+
+.summaryCardQ {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #f59e0b;
+  margin-bottom: 0.4rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.summaryCardIcon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.summaryCardA {
+  margin: 0;
+  color: #fde68a;
+  line-height: 1.6;
+  font-size: 1rem;
+  padding-left: 1.7rem;
+}
+
+.noAnswer {
+  color: rgba(184, 134, 11, 0.5);
+}
+
+/* Plan section */
+.planSection {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(217, 119, 6, 0.08));
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.planTitle {
+  font-size: 1.3rem;
+  color: #f59e0b;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.planList {
+  padding-left: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.planItem {
+  color: #fde68a;
+  line-height: 1.5;
+  font-size: 1rem;
+}
+
+.planItem::marker {
+  color: #f59e0b;
+  font-weight: 700;
+}
+
+/* Summary actions */
+.summaryActions {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.backToEditBtn {
+  padding: 0.7rem 1.5rem;
+  border-radius: 10px;
+  border: 2px solid rgba(245, 158, 11, 0.3);
+  background: transparent;
+  color: #fbbf24;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.backToEditBtn:hover {
+  border-color: #f59e0b;
+}
+
+.saveFinalBtn {
+  padding: 0.7rem 2rem;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #1a0a00;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+}
+
+.saveFinalBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.5);
+}
+
+.cancelBtn {
+  padding: 0.7rem 1.5rem;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  color: #b8860b;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.cancelBtn:hover {
+  color: #f87171;
+}
+
+.backToListBtn {
+  display: block;
+  margin: 2rem auto 0;
+  padding: 0.8rem 2rem;
+  border-radius: 12px;
+  border: 2px solid rgba(245, 158, 11, 0.3);
+  background: transparent;
+  color: #fbbf24;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.backToListBtn:hover {
+  border-color: #f59e0b;
+  background: rgba(245, 158, 11, 0.1);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}

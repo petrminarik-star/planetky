@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+
+:root {
+  --space-dark: #0a0a2e;
+  --space-mid: #16163a;
+  --space-light: #1e1e50;
+  --star-white: #ffffff;
+  --star-yellow: #FFD700;
+  --accent-pink: #FF69B4;
+  --accent-cyan: #00CED1;
+  --accent-green: #98FB98;
+  --accent-purple: #DDA0DD;
+  --accent-orange: #FFA500;
+  --accent-red: #FF6B6B;
+  --accent-blue: #87CEEB;
+  --text-primary: #ffffff;
+  --text-secondary: #b8b8d4;
+  --font-main: 'Nunito', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font-main);
+  background: var(--space-dark);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font-family: var(--font-main);
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+input, textarea {
+  font-family: var(--font-main);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--space-mid);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--space-light);
+  border-radius: 3px;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes slideIn {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 5px currentColor; }
+  50% { box-shadow: 0 0 20px currentColor, 0 0 40px currentColor; }
+}
