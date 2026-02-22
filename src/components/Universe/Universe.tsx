@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useApp } from '../../context/AppContext';
 import { PLANETS } from '../../data/planets';
 import type { PlanetId } from '../../types';
@@ -24,6 +24,7 @@ const STOP_THRESHOLD = 0.05;
 const LAND_DISTANCE = 75;
 const PLANET_SIZE = 64;
 const STORAGE_KEY = 'planetky_rocketPos';
+const JOYSTICK_RADIUS = 50;
 
 const ROCKET_COLORS: Record<string, string> = {
   'rocket-girl': '#ff6eb4',
@@ -67,6 +68,14 @@ export default function Universe() {
 
   const [nearPlanet, setNearPlanet] = useState<PlanetId | null>(null);
   const animRef = useRef(0);
+
+  // Touch joystick state
+  const touchRef = useRef({ ax: 0, ay: 0 }); // normalized acceleration from joystick
+  const joystickBaseRef = useRef<HTMLDivElement>(null);
+  const joystickKnobRef = useRef<HTMLDivElement>(null);
+  const touchIdRef = useRef<number | null>(null);
+  const touchOriginRef = useRef({ x: 0, y: 0 });
+  const [isTouch, setIsTouch] = useState(false);
 
   const rocketColor = ROCKET_COLORS[state.profile?.rocketType ?? 'rocket-boy'];
 
@@ -123,6 +132,78 @@ export default function Universe() {
     };
   }, []);
 
+  // Detect touch device
+  useEffect(() => {
+    const onTouch = () => { setIsTouch(true); };
+    window.addEventListener('touchstart', onTouch, { once: true });
+    return () => window.removeEventListener('touchstart', onTouch);
+  }, []);
+
+  // Touch joystick handlers
+  const handleJoystickStart = useCallback((e: React.TouchEvent) => {
+    if (touchIdRef.current !== null) return;
+    const touch = e.touches[0];
+    touchIdRef.current = touch.identifier;
+    const rect = joystickBaseRef.current?.getBoundingClientRect();
+    if (rect) {
+      touchOriginRef.current = {
+        x: rect.left + rect.width / 2,
+        y: rect.top + rect.height / 2,
+      };
+    }
+    touchRef.current = { ax: 0, ay: 0 };
+    if (joystickKnobRef.current) {
+      joystickKnobRef.current.style.transform = 'translate(-50%, -50%)';
+    }
+  }, []);
+
+  const handleJoystickMove = useCallback((e: React.TouchEvent) => {
+    e.preventDefault();
+    const id = touchIdRef.current;
+    if (id === null) return;
+    let touch: React.Touch | undefined;
+    for (let i = 0; i < e.touches.length; i++) {
+      if (e.touches[i].identifier === id) { touch = e.touches[i]; break; }
+    }
+    if (!touch) return;
+
+    const dx = touch.clientX - touchOriginRef.current.x;
+    const dy = touch.clientY - touchOriginRef.current.y;
+    const dist = Math.hypot(dx, dy);
+    const clamped = Math.min(dist, JOYSTICK_RADIUS);
+    const angle = Math.atan2(dy, dx);
+
+    // Normalize to -1..1 range
+    const norm = clamped / JOYSTICK_RADIUS;
+    touchRef.current = {
+      ax: Math.cos(angle) * norm,
+      ay: Math.sin(angle) * norm,
+    };
+
+    // Move knob visual
+    if (joystickKnobRef.current) {
+      const knobX = Math.cos(angle) * clamped;
+      const knobY = Math.sin(angle) * clamped;
+      joystickKnobRef.current.style.transform = `translate(calc(-50% + ${knobX}px), calc(-50% + ${knobY}px))`;
+    }
+  }, []);
+
+  const handleJoystickEnd = useCallback((e: React.TouchEvent) => {
+    const id = touchIdRef.current;
+    if (id === null) return;
+    let still = false;
+    for (let i = 0; i < e.touches.length; i++) {
+      if (e.touches[i].identifier === id) { still = true; break; }
+    }
+    if (!still) {
+      touchIdRef.current = null;
+      touchRef.current = { ax: 0, ay: 0 };
+      if (joystickKnobRef.current) {
+        joystickKnobRef.current.style.transform = 'translate(-50%, -50%)';
+      }
+    }
+  }, []);
+
   // Game loop with momentum physics
   useEffect(() => {
     const tick = () => {
@@ -136,13 +217,20 @@ export default function Universe() {
       const h = c.clientHeight;
       dimsRef.current = { w, h };
 
-      // Input → acceleration
+      // Input → acceleration (keyboard + touch joystick)
       const keys = keysRef.current;
       let ax = 0, ay = 0;
       if (keys.has('ArrowLeft') || keys.has('a')) ax -= 1;
       if (keys.has('ArrowRight') || keys.has('d')) ax += 1;
       if (keys.has('ArrowUp') || keys.has('w')) ay -= 1;
       if (keys.has('ArrowDown') || keys.has('s')) ay += 1;
+
+      // Merge touch joystick input
+      const tj = touchRef.current;
+      if (tj.ax !== 0 || tj.ay !== 0) {
+        ax += tj.ax;
+        ay += tj.ay;
+      }
 
       if (ax !== 0 || ay !== 0) {
         const len = Math.sqrt(ax * ax + ay * ay);
@@ -289,9 +377,23 @@ export default function Universe() {
         </button>
       )}
 
+      {/* Touch joystick (mobile only) */}
+      {isTouch && (
+        <div
+          ref={joystickBaseRef}
+          className={styles.joystickBase}
+          onTouchStart={handleJoystickStart}
+          onTouchMove={handleJoystickMove}
+          onTouchEnd={handleJoystickEnd}
+          onTouchCancel={handleJoystickEnd}
+        >
+          <div ref={joystickKnobRef} className={styles.joystickKnob} />
+        </div>
+      )}
+
       {/* Controls hint */}
       <div className={styles.hint}>
-        ← ↑ → ↓ létat &nbsp;·&nbsp; Enter = přistát
+        {isTouch ? 'Táhni joystickem a leť k planetám' : '← ↑ → ↓ létat \u00a0·\u00a0 Enter = přistát'}
       </div>
     </div>
   );
