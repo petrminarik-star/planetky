@@ -5,10 +5,50 @@ import styles from './Cards.module.css';
 
 type DeckType = 'morning' | 'evening';
 
-const CARD_COUNT = 18;
+const MORNING_CARDS = [
+  'Zkus dnes udělat něco, co je těžké, jako by to udělal tvůj oblíbený superhrdina.',
+  'Zkus dnes někomu pomoci, třeba mamince, tatínkovi, paní učitelce nebo někomu jinému.',
+  'Na co se dnes nejvíc těšíš?',
+  'Co se chceš dnes naučit nového?',
+  'Když se bojíš, pomysli na něco, co máš rád/a, co tě uklidní, nebo vytvoř s rodiči něco, co tě uklidní a nos to s sebou.',
+  'Na co se chceš někoho zeptat, ale možná se bojíš?',
+  'Co máš dnes chuť udělat jinak?',
+  'Udělej dnes něco samostatně bez pomoci maminky, tatínka nebo paní učitelky.',
+  'Kdyby tvůj den začínal jako dobrodružství, co by bylo prvním krokem na cestě?',
+  'Poděkuj dnes někomu, kdo si to zaslouží.',
+  'Představ si, že máš kouzelný štětec, kterým můžeš malovat svůj den. Jaké barvy bys použil/a? Co bys namaloval/a?',
+  'Jakou věc, kterou dnes uděláš, bys chtěl/a ukázat svému budoucímu já?',
+  'Představ si, že jsi malé semínko, které roste. Co dnes potřebuješ, abys mohl/a vyrůst?',
+  'Kdybych ti mohl/a dát kouzlo, které ti pomůže na něco se dnes soustředit, co by to bylo?',
+  'Co můžeš dnes udělat, aby se tvůj svět stal krásnějším?',
+  'Najdi jednu věc kolem sebe, která tě překvapí. Co jsi objevil/a?',
+  'Co by tvé nejoblíbenější zvíře udělalo na tvém místě?',
+  'Kdybys měl/a napsat dopis slunci, co bys mu chtěl/a říct?',
+];
+
+const EVENING_CARDS = [
+  'Představ si, že tvůj sen je jako pohádka – co by se v něm mohlo stát, jaký hrdina by v něm byl a jaký úkol by měl splnit?',
+  'Co se ti dnes líbilo?',
+  'Co se ti dnes nelíbilo?',
+  'Podívej se z okna a najdi hvězdu, která svítí jen pro tebe a vždy tě ochrání, takže se nemáš čeho bát.',
+  'Co bylo dnes nejtěžší?',
+  'Pusť si dnes s maminkou nebo tatínkem relaxační hudbu před spaním.',
+  'Co bys dnes udělal/a jinak?',
+  'Co by sis přál/a, aby se zítra stalo – měj to v srdíčku a mysli na to.',
+  'Zavři oči a představ si, že pluješ na lodce snů. Kam by ses chtěl/a vydat?',
+  'Představ si, že se každý hezký okamžik z dneška proměnil v hvězdu na noční obloze. Kolik jich vidíš?',
+  'Kdybys mohl/a dnešku poděkovat za jednu věc, co by to bylo?',
+  'Představ si, že všechny myšlenky, které ti dneska běžely hlavou, usínají s tebou. Co bys jim popřál/a na dobrou noc?',
+  'Kdyby se tvůj sen mohl proměnit ve skutečnost, co by sis přál/a, aby se stalo?',
+  'Co jsi dnes objevil/a o sobě, co tě potěšilo?',
+  'Zkus zavřít oči a poslat jeden hezký pocit někomu, koho máš rád/a. Co bys mu řekl/a?',
+  'Představ si, že se každá tvoje dnešní myšlenka promění v lístek do kouzelného lesa. Jaké by ten les měl barvy?',
+  'Kdybys mohl/a snít o čemkoli, co by to bylo?',
+  'Kdybys měl/a napsat o dnešku jednu větu do kouzelné knihy, co by to bylo?',
+];
 
 interface DrawnCard {
-  imageUrl: string;
+  text: string;
   deck: DeckType;
 }
 
@@ -21,11 +61,12 @@ export default function Cards() {
 
   const drawCard = useCallback((deck: DeckType) => {
     const lastIndex = deck === 'morning' ? lastMorningIndex : lastEveningIndex;
+    const cards = deck === 'morning' ? MORNING_CARDS : EVENING_CARDS;
 
     let randomIndex: number;
     do {
-      randomIndex = Math.floor(Math.random() * CARD_COUNT);
-    } while (randomIndex === lastIndex && CARD_COUNT > 1);
+      randomIndex = Math.floor(Math.random() * cards.length);
+    } while (randomIndex === lastIndex && cards.length > 1);
 
     if (deck === 'morning') {
       setLastMorningIndex(randomIndex);
@@ -33,12 +74,9 @@ export default function Cards() {
       setLastEveningIndex(randomIndex);
     }
 
-    const folder = deck === 'morning' ? 'morning' : 'evening';
-    const imageUrl = `${import.meta.env.BASE_URL}assets/cards/${folder}/${randomIndex + 1}.png`;
-
     setIsFlipping(true);
     setIsFlipped(false);
-    setDrawnCard({ imageUrl, deck });
+    setDrawnCard({ text: cards[randomIndex], deck });
 
     setTimeout(() => {
       setIsFlipped(true);
@@ -123,13 +161,24 @@ export default function Cards() {
 
               {/* Card Front */}
               <div
-                className={`${styles.cardSide} ${styles.cardFront}`}
+                className={`${styles.cardSide} ${styles.cardFront} ${
+                  drawnCard.deck === 'morning' ? styles.morningFront : styles.eveningFront
+                }`}
               >
-                <img
-                  src={drawnCard.imageUrl}
-                  alt="Kartička"
-                  className={styles.cardImage}
-                />
+                <div className={styles.cardFrontContent}>
+                  <span className={styles.cardTitle}>
+                    {drawnCard.deck === 'morning' ? 'Jang' : 'Jin'}
+                  </span>
+                  <p className={styles.cardText}>{drawnCard.text}</p>
+                </div>
+                {drawnCard.deck === 'morning' ? (
+                  <div className={styles.morningSparkles} />
+                ) : (
+                  <>
+                    <div className={styles.eveningMoon}>&#127769;</div>
+                    <div className={styles.eveningClouds}>&#9729;&#65039;</div>
+                  </>
+                )}
               </div>
             </div>
 

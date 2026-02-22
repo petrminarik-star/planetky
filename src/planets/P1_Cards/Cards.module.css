@@ -225,16 +225,120 @@
   box-shadow: 0 12px 40px rgba(75, 0, 130, 0.5), 0 0 80px rgba(138, 43, 226, 0.15);
 }
 
-.cardFront {
-  background: transparent;
+/* Morning card front */
+.morningFront {
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(255, 255, 200, 0.9) 0%, transparent 50%),
+    linear-gradient(180deg, #f5d442 0%, #f0c832 30%, #e8b820 70%, #d4a010 100%);
+  box-shadow: 0 12px 40px rgba(255, 215, 0, 0.4), 0 0 80px rgba(255, 140, 0, 0.15);
   overflow: hidden;
 }
 
-.cardImage {
+/* Evening card front */
+.eveningFront {
+  background:
+    radial-gradient(circle at 30% 20%, rgba(100, 80, 160, 0.5) 0%, transparent 40%),
+    linear-gradient(180deg, #3a1578 0%, #2a1060 30%, #1a0a48 60%, #0e0630 100%);
+  box-shadow: 0 12px 40px rgba(75, 0, 130, 0.5), 0 0 80px rgba(138, 43, 226, 0.15);
+  overflow: hidden;
+}
+
+.cardFrontContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 20px;
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  border-radius: 20px;
+  box-sizing: border-box;
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-style: italic;
+  margin-bottom: 16px;
+}
+
+.morningFront .cardTitle {
+  color: #7a5a00;
+  text-shadow: 0 1px 4px rgba(255, 255, 200, 0.6);
+}
+
+.eveningFront .cardTitle {
+  color: #e0d0ff;
+  text-shadow: 0 0 12px rgba(200, 180, 255, 0.5);
+}
+
+.cardText {
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: center;
+  margin: 0;
+  padding: 0 4px;
+}
+
+.morningFront .cardText {
+  color: #4a3500;
+}
+
+.eveningFront .cardText {
+  color: #e8e0ff;
+  text-shadow: 0 0 8px rgba(200, 180, 255, 0.3);
+}
+
+/* Morning sparkle decoration at bottom */
+.morningSparkles {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 35%;
+  z-index: 1;
+  border-radius: 0 0 20px 20px;
+  background:
+    radial-gradient(circle at 10% 80%, #ff6b6b 1px, transparent 1px),
+    radial-gradient(circle at 20% 60%, #4ecdc4 1px, transparent 1px),
+    radial-gradient(circle at 30% 90%, #ffe66d 1.5px, transparent 1.5px),
+    radial-gradient(circle at 40% 70%, #ff6b9d 1px, transparent 1px),
+    radial-gradient(circle at 50% 85%, #45b7d1 1px, transparent 1px),
+    radial-gradient(circle at 60% 65%, #f9ca24 1.5px, transparent 1.5px),
+    radial-gradient(circle at 70% 95%, #ff4757 1px, transparent 1px),
+    radial-gradient(circle at 80% 75%, #7bed9f 1px, transparent 1px),
+    radial-gradient(circle at 90% 60%, #ff6348 1px, transparent 1px),
+    radial-gradient(circle at 15% 95%, #a29bfe 1px, transparent 1px),
+    radial-gradient(circle at 45% 55%, #fd79a8 1px, transparent 1px),
+    radial-gradient(circle at 75% 50%, #55efc4 1.5px, transparent 1.5px),
+    radial-gradient(circle at 85% 90%, #ffeaa7 1px, transparent 1px),
+    radial-gradient(circle at 25% 75%, #74b9ff 1px, transparent 1px),
+    radial-gradient(circle at 55% 95%, #e17055 1px, transparent 1px),
+    radial-gradient(circle at 95% 80%, #dfe6e9 1.5px, transparent 1.5px);
+  opacity: 0.7;
+}
+
+/* Evening moon */
+.eveningMoon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 2.2rem;
+  z-index: 1;
+  filter: drop-shadow(0 0 8px rgba(255, 220, 100, 0.5));
+}
+
+/* Evening clouds */
+.eveningClouds {
+  position: absolute;
+  top: 18px;
+  left: 12px;
+  font-size: 2rem;
+  z-index: 1;
+  opacity: 0.7;
+  filter: drop-shadow(0 2px 6px rgba(100, 80, 160, 0.4));
 }
 
 .cardBackPattern {
