@@ -17,9 +17,13 @@ const PLANET_POSITIONS: { id: PlanetId; x: number; y: number }[] = [
   { id: 'heroes',      x: 0.46, y: 0.90 },
 ];
 
-const ROCKET_SPEED = 4;
+const ACCELERATION = 0.3;
+const FRICTION = 0.95;
+const MAX_SPEED = 6;
+const STOP_THRESHOLD = 0.05;
 const LAND_DISTANCE = 75;
 const PLANET_SIZE = 64;
+const STORAGE_KEY = 'planetky_rocketPos';
 
 const ROCKET_COLORS: Record<string, string> = {
   'rocket-girl': '#ff6eb4',
@@ -28,13 +32,35 @@ const ROCKET_COLORS: Record<string, string> = {
   'rocket-cosmic': '#a78bfa',
 };
 
+function saveRocketPos(x: number, y: number, angle: number, w: number, h: number) {
+  if (w <= 0 || h <= 0) return;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({ fx: x / w, fy: y / h, angle }));
+}
+
+function loadRocketPos(w: number, h: number): { x: number; y: number; angle: number } {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      const { fx, fy, angle } = JSON.parse(raw);
+      return {
+        x: Math.max(20, Math.min(w - 20, fx * w)),
+        y: Math.max(20, Math.min(h - 20, fy * h)),
+        angle: angle ?? -45,
+      };
+    }
+  } catch { /* ignore */ }
+  return { x: w / 2, y: h / 2, angle: -45 };
+}
+
 export default function Universe() {
   const { state, navigateTo } = useApp();
   const containerRef = useRef<HTMLDivElement>(null);
   const rocketElRef = useRef<HTMLDivElement>(null);
   const keysRef = useRef(new Set<string>());
   const posRef = useRef({ x: 0, y: 0 });
+  const velRef = useRef({ vx: 0, vy: 0 });
   const angleRef = useRef(-45);
+  const dimsRef = useRef({ w: 0, h: 0 });
   const nearRef = useRef<PlanetId | null>(null);
   const navigateRef = useRef(navigateTo);
   navigateRef.current = navigateTo;
@@ -44,17 +70,34 @@ export default function Universe() {
 
   const rocketColor = ROCKET_COLORS[state.profile?.rocketType ?? 'rocket-boy'];
 
-  // Initialize rocket position at center
+  const handleNavigate = (planetId: PlanetId) => {
+    const c = containerRef.current;
+    if (c) saveRocketPos(posRef.current.x, posRef.current.y, angleRef.current, c.clientWidth, c.clientHeight);
+    navigateRef.current(planetId);
+  };
+
+  // Initialize rocket position (restore from localStorage or center)
   useEffect(() => {
     const c = containerRef.current;
     if (!c) return;
-    posRef.current = { x: c.clientWidth / 2, y: c.clientHeight / 2 };
+    const { x, y, angle } = loadRocketPos(c.clientWidth, c.clientHeight);
+    posRef.current = { x, y };
+    angleRef.current = angle;
+    velRef.current = { vx: 0, vy: 0 };
     const el = rocketElRef.current;
     if (el) {
-      el.style.left = `${posRef.current.x}px`;
-      el.style.top = `${posRef.current.y}px`;
-      el.style.transform = `translate(-50%, -50%) rotate(${angleRef.current}deg)`;
+      el.style.left = `${x}px`;
+      el.style.top = `${y}px`;
+      el.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
     }
+  }, []);
+
+  // Save on unmount
+  useEffect(() => {
+    return () => {
+      const { w, h } = dimsRef.current;
+      if (w > 0) saveRocketPos(posRef.current.x, posRef.current.y, angleRef.current, w, h);
+    };
   }, []);
 
   // Keyboard listeners
@@ -67,7 +110,7 @@ export default function Universe() {
       }
       if ((k === 'Enter' || k === ' ') && nearRef.current) {
         e.preventDefault();
-        navigateRef.current(nearRef.current);
+        handleNavigate(nearRef.current);
       }
     };
     const onUp = (e: KeyboardEvent) => keysRef.current.delete(e.key);
@@ -80,7 +123,7 @@ export default function Universe() {
     };
   }, []);
 
-  // Game loop
+  // Game loop with momentum physics
   useEffect(() => {
     const tick = () => {
       const c = containerRef.current;
@@ -89,36 +132,65 @@ export default function Universe() {
         return;
       }
 
+      const w = c.clientWidth;
+      const h = c.clientHeight;
+      dimsRef.current = { w, h };
+
+      // Input → acceleration
       const keys = keysRef.current;
-      let dx = 0, dy = 0;
-      if (keys.has('ArrowLeft') || keys.has('a')) dx -= 1;
-      if (keys.has('ArrowRight') || keys.has('d')) dx += 1;
-      if (keys.has('ArrowUp') || keys.has('w')) dy -= 1;
-      if (keys.has('ArrowDown') || keys.has('s')) dy += 1;
+      let ax = 0, ay = 0;
+      if (keys.has('ArrowLeft') || keys.has('a')) ax -= 1;
+      if (keys.has('ArrowRight') || keys.has('d')) ax += 1;
+      if (keys.has('ArrowUp') || keys.has('w')) ay -= 1;
+      if (keys.has('ArrowDown') || keys.has('s')) ay += 1;
 
-      // Move rocket
-      if (dx !== 0 || dy !== 0) {
-        const len = Math.sqrt(dx * dx + dy * dy);
-        dx = (dx / len) * ROCKET_SPEED;
-        dy = (dy / len) * ROCKET_SPEED;
+      if (ax !== 0 || ay !== 0) {
+        const len = Math.sqrt(ax * ax + ay * ay);
+        ax = (ax / len) * ACCELERATION;
+        ay = (ay / len) * ACCELERATION;
+      }
 
-        const w = c.clientWidth;
-        const h = c.clientHeight;
-        posRef.current.x = Math.max(20, Math.min(w - 20, posRef.current.x + dx));
-        posRef.current.y = Math.max(20, Math.min(h - 20, posRef.current.y + dy));
-        angleRef.current = Math.atan2(dy, dx) * (180 / Math.PI) + 45;
+      const vel = velRef.current;
+      vel.vx = (vel.vx + ax) * FRICTION;
+      vel.vy = (vel.vy + ay) * FRICTION;
+
+      // Clamp to max speed
+      const speed = Math.hypot(vel.vx, vel.vy);
+      if (speed > MAX_SPEED) {
+        vel.vx = (vel.vx / speed) * MAX_SPEED;
+        vel.vy = (vel.vy / speed) * MAX_SPEED;
+      }
+
+      // Dead zone — stop completely
+      if (speed < STOP_THRESHOLD) {
+        vel.vx = 0;
+        vel.vy = 0;
+      }
+
+      // Update position
+      if (vel.vx !== 0 || vel.vy !== 0) {
+        const pos = posRef.current;
+        const newX = Math.max(20, Math.min(w - 20, pos.x + vel.vx));
+        const newY = Math.max(20, Math.min(h - 20, pos.y + vel.vy));
+
+        // Kill velocity at boundaries
+        if (newX === 20 || newX === w - 20) vel.vx = 0;
+        if (newY === 20 || newY === h - 20) vel.vy = 0;
+
+        pos.x = newX;
+        pos.y = newY;
+
+        angleRef.current = Math.atan2(vel.vy, vel.vx) * (180 / Math.PI) + 45;
 
         const el = rocketElRef.current;
         if (el) {
-          el.style.left = `${posRef.current.x}px`;
-          el.style.top = `${posRef.current.y}px`;
+          el.style.left = `${newX}px`;
+          el.style.top = `${newY}px`;
           el.style.transform = `translate(-50%, -50%) rotate(${angleRef.current}deg)`;
         }
       }
 
       // Proximity check
-      const w = c.clientWidth;
-      const h = c.clientHeight;
       let closest: PlanetId | null = null;
       let closestDist = Infinity;
       for (const p of PLANET_POSITIONS) {
@@ -205,7 +277,7 @@ export default function Universe() {
       {nearPlanet && nearData && nearLayout && (
         <button
           className={styles.landButton}
-          onClick={() => navigateTo(nearPlanet)}
+          onClick={() => handleNavigate(nearPlanet)}
           style={{
             left: `${nearLayout.x * 100}%`,
             top: `calc(${nearLayout.y * 100}% - ${PLANET_SIZE / 2 + 18}px)`,
