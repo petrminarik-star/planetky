@@ -1,13 +1,14 @@
 import { useState, useCallback } from 'react';
 import PlanetHeader from '../../components/common/PlanetHeader';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
-import { MORNING_CARDS, EVENING_CARDS } from '../../data/planets';
 import styles from './Cards.module.css';
 
 type DeckType = 'morning' | 'evening';
 
+const CARD_COUNT = 18;
+
 interface DrawnCard {
-  text: string;
+  imageUrl: string;
   deck: DeckType;
 }
 
@@ -19,13 +20,12 @@ export default function Cards() {
   const [lastEveningIndex, setLastEveningIndex] = useLocalStorage<number>('cards_lastEvening', -1);
 
   const drawCard = useCallback((deck: DeckType) => {
-    const cards = deck === 'morning' ? MORNING_CARDS : EVENING_CARDS;
     const lastIndex = deck === 'morning' ? lastMorningIndex : lastEveningIndex;
 
     let randomIndex: number;
     do {
-      randomIndex = Math.floor(Math.random() * cards.length);
-    } while (randomIndex === lastIndex && cards.length > 1);
+      randomIndex = Math.floor(Math.random() * CARD_COUNT);
+    } while (randomIndex === lastIndex && CARD_COUNT > 1);
 
     if (deck === 'morning') {
       setLastMorningIndex(randomIndex);
@@ -33,9 +33,12 @@ export default function Cards() {
       setLastEveningIndex(randomIndex);
     }
 
+    const folder = deck === 'morning' ? 'morning' : 'evening';
+    const imageUrl = `/assets/cards/${folder}/${randomIndex + 1}.png`;
+
     setIsFlipping(true);
     setIsFlipped(false);
-    setDrawnCard({ text: cards[randomIndex], deck });
+    setDrawnCard({ imageUrl, deck });
 
     setTimeout(() => {
       setIsFlipped(true);
@@ -120,19 +123,13 @@ export default function Cards() {
 
               {/* Card Front */}
               <div
-                className={`${styles.cardSide} ${styles.cardFront} ${
-                  drawnCard.deck === 'morning' ? styles.morningFront : styles.eveningFront
-                }`}
+                className={`${styles.cardSide} ${styles.cardFront}`}
               >
-                <div className={styles.cardContent}>
-                  <span className={styles.cardIcon}>
-                    {drawnCard.deck === 'morning' ? '\u2600\uFE0F' : '\u2B50'}
-                  </span>
-                  <p className={styles.cardText}>{drawnCard.text}</p>
-                  <span className={styles.cardIcon}>
-                    {drawnCard.deck === 'morning' ? '\uD83C\uDF3B' : '\uD83C\uDF19'}
-                  </span>
-                </div>
+                <img
+                  src={drawnCard.imageUrl}
+                  alt="Kartička"
+                  className={styles.cardImage}
+                />
               </div>
             </div>
 
