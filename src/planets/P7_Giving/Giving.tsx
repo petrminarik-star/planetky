@@ -200,7 +200,7 @@ export default function Giving() {
                 onClick={handleSave}
                 disabled={!Object.values(form).some(v => v.trim())}
               >
-                {saved ? '&#10003; Uloženo!' : '&#10084; Uložit'}
+                {saved ? '\u2713 Uloženo!' : '\u2764 Uložit'}
               </button>
               {entries.length > 0 && (
                 <button
@@ -226,7 +226,7 @@ export default function Giving() {
                 >
                   <div className={styles.entryCardHeader}>
                     <span className={styles.entryBadge}>
-                      {entry.type === 'regular' ? '&#128257; Pravidelně' : '&#127873; Jednorázově'}
+                      {entry.type === 'regular' ? '\uD83D\uDD01 Pravidelně' : '\uD83C\uDF81 Jednorázově'}
                     </span>
                     <button
                       className={styles.deleteBtn}

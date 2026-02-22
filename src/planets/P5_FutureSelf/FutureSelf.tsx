@@ -313,7 +313,7 @@ export default function FutureSelf() {
                 </div>
 
                 <button className={styles.saveBtn} onClick={handleSaveAvatar}>
-                  {avatarSaved ? '&#10003; Uloženo!' : 'Uložit avatar'}
+                  {avatarSaved ? '\u2713 Uloženo!' : 'Uložit avatar'}
                 </button>
               </div>
             </div>

@@ -247,7 +247,7 @@ export default function Inventions() {
                 className={styles.nextBtn}
                 onClick={goNext}
               >
-                {currentStep === QUESTIONS.length - 1 ? 'Zobrazit shrnutí' : 'Další &#8594;'}
+                {currentStep === QUESTIONS.length - 1 ? 'Zobrazit shrnutí' : 'Další \u2192'}
               </button>
             </div>
 
