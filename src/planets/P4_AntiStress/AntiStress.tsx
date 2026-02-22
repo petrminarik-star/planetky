@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import PlanetHeader from '../../components/common/PlanetHeader';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
-import { AFFIRMATIONS, JOY_CARDS } from '../../data/planets';
+import { JOY_CARDS } from '../../data/planets';
 import styles from './AntiStress.module.css';
 
 /* -------------------------------------------------------
@@ -302,9 +302,11 @@ function Dychani() {
    3. Afirmace (Affirmations)
    ------------------------------------------------------- */
 
+const AFFIRMATION_COUNT = 20;
+
 function AfirmaceSection() {
   const [currentIndex, setCurrentIndex] = useState(() =>
-    Math.floor(Math.random() * AFFIRMATIONS.length)
+    Math.floor(Math.random() * AFFIRMATION_COUNT)
   );
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -313,12 +315,14 @@ function AfirmaceSection() {
     setTimeout(() => {
       let newIndex: number;
       do {
-        newIndex = Math.floor(Math.random() * AFFIRMATIONS.length);
-      } while (newIndex === currentIndex && AFFIRMATIONS.length > 1);
+        newIndex = Math.floor(Math.random() * AFFIRMATION_COUNT);
+      } while (newIndex === currentIndex && AFFIRMATION_COUNT > 1);
       setCurrentIndex(newIndex);
       setIsAnimating(false);
     }, 300);
   };
+
+  const imageUrl = `${import.meta.env.BASE_URL}assets/affirmations/${currentIndex + 1}.png`;
 
   return (
     <div className={styles.afirmace}>
@@ -326,7 +330,11 @@ function AfirmaceSection() {
       <p className={styles.sectionDesc}>Přečti si a opakuj si v duchu:</p>
 
       <div className={`${styles.affirmationCard} ${isAnimating ? styles.affirmationOut : ''}`}>
-        <p className={styles.affirmationText}>{AFFIRMATIONS[currentIndex]}</p>
+        <img
+          src={imageUrl}
+          alt="Afirmace"
+          className={styles.affirmationImage}
+        />
       </div>
 
       <button className={styles.nextCardBtn} onClick={nextAffirmation}>
