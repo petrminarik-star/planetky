@@ -61,40 +61,42 @@ export default function Cards() {
               Vyber si balíček a vytáhni si svou kartičku!
             </p>
             <div className={styles.decksRow}>
-              {/* Morning Deck */}
+              {/* Morning Deck – Jang */}
               <button
                 className={`${styles.deckStack} ${styles.morningDeck}`}
                 onClick={() => drawCard('morning')}
-                aria-label="Ranní kartičky"
+                aria-label="Jang – ranní kartičky"
               >
                 <div className={styles.deckCard3} />
                 <div className={styles.deckCard2} />
                 <div className={styles.deckCard1}>
                   <div className={styles.deckFace}>
                     <span className={styles.deckEmoji}>&#x2600;&#xFE0F;</span>
+                    <span className={styles.deckName}>Jang</span>
                     <span className={styles.deckStar1}>&#x2B50;</span>
                     <span className={styles.deckStar2}>&#x2B50;</span>
                   </div>
                 </div>
-                <span className={styles.deckLabel}>Ranní kartičky</span>
+                <span className={styles.deckLabel}>Jang – ranní</span>
               </button>
 
-              {/* Evening Deck */}
+              {/* Evening Deck – Jin */}
               <button
                 className={`${styles.deckStack} ${styles.eveningDeck}`}
                 onClick={() => drawCard('evening')}
-                aria-label="Večerní kartičky"
+                aria-label="Jin – večerní kartičky"
               >
                 <div className={styles.deckCard3} />
                 <div className={styles.deckCard2} />
                 <div className={styles.deckCard1}>
                   <div className={styles.deckFace}>
                     <span className={styles.deckEmoji}>&#x1F319;</span>
+                    <span className={styles.deckName}>Jin</span>
                     <span className={styles.deckStar1}>&#x2B50;</span>
                     <span className={styles.deckStar2}>&#x2B50;</span>
                   </div>
                 </div>
-                <span className={styles.deckLabel}>Večerní kartičky</span>
+                <span className={styles.deckLabel}>Jin – večerní</span>
               </button>
             </div>
           </>
