@@ -34,7 +34,7 @@ export default function Cards() {
     }
 
     const folder = deck === 'morning' ? 'morning' : 'evening';
-    const imageUrl = `/assets/cards/${folder}/${randomIndex + 1}.png`;
+    const imageUrl = `${import.meta.env.BASE_URL}assets/cards/${folder}/${randomIndex + 1}.png`;
 
     setIsFlipping(true);
     setIsFlipped(false);
